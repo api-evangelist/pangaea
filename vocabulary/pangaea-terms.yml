@@ -1,0 +1,143 @@
+name: PANGAEA Controlled Vocabulary
+description: >
+  Controlled vocabulary and term dictionary used by PANGAEA for classifying
+  geoscientific datasets by topic, parameter, method, and location. Terms are
+  maintained in the PANGAEA term dictionary and accessible via the Elasticsearch
+  Term API at https://ws.pangaea.de/es/pangaea-terms/term/_search.
+version: 1.0.0
+source: https://www.pangaea.de/
+termAPI: https://ws.pangaea.de/es/pangaea-terms/term/_search
+
+topicCategories:
+  - id: topicBiologicalClassification
+    label: Biological Classification
+    description: Taxonomy and classification of organisms found in samples
+  - id: topicChemistry
+    label: Chemistry
+    description: Chemical composition of water, sediment, ice, and rock samples
+  - id: topicClimateRecord
+    label: Climate Record
+    description: Long-term climate data including temperature, precipitation, ice cores
+  - id: topicCoastalAndShallowSea
+    label: Coastal and Shallow Sea
+    description: Measurements from coastal zones and shallow water environments
+  - id: topicOceanAtmosphere
+    label: Ocean Atmosphere
+    description: Air-sea interaction data, atmospheric measurements over oceans
+  - id: topicOceanBasins
+    label: Ocean Basins
+    description: Deep-sea and ocean basin measurements and sediment records
+  - id: topicPaleoceanography
+    label: Paleoceanography
+    description: Historical ocean conditions reconstructed from sediment cores and proxies
+  - id: topicLakes
+    label: Lakes
+    description: Freshwater lake sediment and water column measurements
+  - id: topicTerrestrialScience
+    label: Terrestrial Science
+    description: Land-based environmental and geological measurements
+
+commonParameters:
+  - id: 1350
+    name: "Temperature, water"
+    abbreviation: "Temp"
+    unit: "°C"
+    description: Water temperature measured in degrees Celsius
+  - id: 1351
+    name: "Salinity"
+    abbreviation: "Sal"
+    unit: "PSU"
+    description: Practical salinity units of seawater
+  - id: 1352
+    name: "Oxygen"
+    abbreviation: "O2"
+    unit: "µmol/l"
+    description: Dissolved oxygen concentration
+  - id: 1353
+    name: "pH"
+    abbreviation: "pH"
+    unit: ""
+    description: Hydrogen ion concentration (acidity/alkalinity)
+  - id: 1354
+    name: "Pressure, water"
+    abbreviation: "Press"
+    unit: "dbar"
+    description: Water pressure in decibars
+  - id: 1355
+    name: "Chlorophyll a"
+    abbreviation: "Chl a"
+    unit: "µg/l"
+    description: Chlorophyll a pigment concentration
+  - id: 1356
+    name: "Nitrate"
+    abbreviation: "NO3"
+    unit: "µmol/l"
+    description: Nitrate concentration in seawater
+  - id: 1357
+    name: "Phosphate"
+    abbreviation: "PO4"
+    unit: "µmol/l"
+    description: Phosphate concentration in seawater
+  - id: 1358
+    name: "Silicate"
+    abbreviation: "Si(OH)4"
+    unit: "µmol/l"
+    description: Silicate concentration in seawater
+
+metadataFormats:
+  - prefix: oai_dc
+    name: Dublin Core
+    schema: http://www.openarchives.org/OAI/2.0/oai_dc.xsd
+    namespace: http://www.openarchives.org/OAI/2.0/oai_dc/
+    description: Simple Dublin Core metadata for basic interoperability
+  - prefix: datacite3
+    name: DataCite Metadata Schema 3
+    schema: http://schema.datacite.org/meta/kernel-3/metadata.xsd
+    namespace: http://datacite.org/schema/kernel-3
+    description: DataCite metadata kernel version 3 for DOI registration
+  - prefix: datacite4
+    name: DataCite Metadata Schema 4
+    schema: http://schema.datacite.org/meta/kernel-4/metadata.xsd
+    namespace: http://datacite.org/schema/kernel-4
+    description: DataCite metadata kernel version 4 (current standard)
+  - prefix: json-ld
+    name: JSON-LD / Schema.org Dataset
+    schema: https://schema.org/Dataset
+    namespace: https://schema.org/
+    description: Schema.org Dataset markup for Google Dataset Search discovery
+  - prefix: iso19139
+    name: ISO 19139
+    schema: http://www.isotc211.org/2005/gmd
+    namespace: http://www.isotc211.org/2005/gmd
+    description: ISO 19115/19139 geographic metadata standard
+  - prefix: dif
+    name: Directory Interchange Format
+    schema: http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/dif.xsd
+    namespace: http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/
+    description: NASA Global Change Master Directory format
+
+oaiSets:
+  - spec: curation
+    name: Curated datasets
+    description: Datasets that have passed quality control review
+  - spec: topicBiologicalClassification
+    name: Biological Classification
+    description: Datasets related to biological classification
+  - spec: topicChemistry
+    name: Chemistry
+    description: Datasets with chemical measurement data
+  - spec: topicClimateRecord
+    name: Climate Record
+    description: Long-term climate record datasets
+  - spec: topicCoastalAndShallowSea
+    name: Coastal and Shallow Sea
+    description: Coastal zone and shallow water datasets
+  - spec: topicOceanAtmosphere
+    name: Ocean Atmosphere
+    description: Ocean-atmosphere interaction datasets
+  - spec: topicOceanBasins
+    name: Ocean Basins
+    description: Deep ocean basin datasets
+  - spec: topicPaleoceanography
+    name: Paleoceanography
+    description: Paleoceanographic proxy datasets

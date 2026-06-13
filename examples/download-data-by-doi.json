@@ -1,0 +1,17 @@
+{
+  "title": "Download Dataset Data by DOI with Column Filtering",
+  "description": "Example request to retrieve tabular data from a specific PANGAEA dataset using its DOI, selecting specific columns and filtering by a temperature threshold.",
+  "endpoint": "https://ws.pangaea.de/dds-fdp/rest/panquery",
+  "method": "GET",
+  "parameters": {
+    "datasetDOI": "10.1594/PANGAEA.833575",
+    "columns": "1,2,3,5,7",
+    "filterParameterValue": "5:>15"
+  },
+  "curlExample": "curl -G 'https://ws.pangaea.de/dds-fdp/rest/panquery' --data-urlencode 'datasetDOI=10.1594/PANGAEA.833575' --data-urlencode 'columns=1,2,3,5,7' --data-urlencode 'filterParameterValue=5:>15'",
+  "response": {
+    "format": "text/tab-separated-values",
+    "description": "Tab-delimited data with header row. Column order matches the requested columns parameter.",
+    "example": "Date/Time\tLatitude\tLongitude\tDepth water [m]\tTemp [°C]\n2014-03-01T12:00:00\t52.5\t8.3\t50\t16.2\n2014-03-01T13:00:00\t52.5\t8.3\t25\t18.1"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "pangaea": "https://pangaea.de/terms/",
+    "dcat": "https://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "datacite": "http://schema.datacite.org/oai/oai-1.1/",
+    "oai": "http://www.openarchives.org/OAI/2.0/"
+  },
+  "@type": "Organization",
+  "@id": "https://www.pangaea.de",
+  "name": "PANGAEA",
+  "description": "PANGAEA is a data publisher and library for earth and environmental science, providing open access to geoscientific datasets including ocean data, climate records, sediment cores, and environmental measurements from scientific expeditions worldwide.",
+  "url": "https://www.pangaea.de/",
+  "logo": "https://www.pangaea.de/assets/img/pangaea-logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "technical support",
+    "email": "tech@pangaea.de"
+  },
+  "sameAs": [
+    "https://github.com/pangaea-data-publisher"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "PANGAEA Web Services",
+    "itemListElement": [
+      {
+        "@type": "WebAPI",
+        "@id": "https://ws.pangaea.de/es/pangaea/panmd/_search",
+        "name": "PANGAEA Elasticsearch Search API",
+        "description": "Full-text and faceted search across PANGAEA's 445,000+ geoscientific datasets using Elasticsearch.",
+        "documentation": "https://wiki.pangaea.de/wiki/PANGAEA_search",
+        "provider": {
+          "@id": "https://www.pangaea.de"
+        },
+        "endpointURL": "https://ws.pangaea.de/es/pangaea/panmd/_search",
+        "encodingFormat": "application/json"
+      },
+      {
+        "@type": "WebAPI",
+        "@id": "https://ws.pangaea.de/oai/provider",
+        "name": "PANGAEA OAI-PMH Metadata Harvesting API",
+        "description": "OAI-PMH 2.0 compliant endpoint for harvesting metadata from PANGAEA's dataset repository.",
+        "documentation": "https://www.pangaea.de/about/services.php",
+        "provider": {
+          "@id": "https://www.pangaea.de"
+        },
+        "endpointURL": "https://ws.pangaea.de/oai/provider",
+        "encodingFormat": "text/xml",
+        "conformsTo": "http://www.openarchives.org/OAI/openarchivesprotocol.html"
+      },
+      {
+        "@type": "WebAPI",
+        "@id": "https://ws.pangaea.de/dds-fdp/rest/panquery",
+        "name": "PANGAEA Data Download Service - Filter by DOI",
+        "description": "REST service for retrieving tabular dataset data filtered by dataset DOI and parameter values.",
+        "documentation": "https://ws.pangaea.de/dds-fdp/",
+        "provider": {
+          "@id": "https://www.pangaea.de"
+        },
+        "endpointURL": "https://ws.pangaea.de/dds-fdp/rest/panquery",
+        "encodingFormat": "text/tab-separated-values"
+      },
+      {
+        "@type": "WebAPI",
+        "@id": "https://ws.pangaea.de/dds-fgp/rest/dwhquery",
+        "name": "PANGAEA Data Download Service - Filter by Geo Parameters",
+        "description": "REST service for retrieving geoscientific measurements filtered by geographic bounding box, temporal range, and depth constraints.",
+        "documentation": "https://ws.pangaea.de/dds-fgp/",
+        "provider": {
+          "@id": "https://www.pangaea.de"
+        },
+        "endpointURL": "https://ws.pangaea.de/dds-fgp/rest/dwhquery",
+        "encodingFormat": "text/tab-separated-values"
+      },
+      {
+        "@type": "WebAPI",
+        "@id": "https://maps.awi.de/services/common/pangaea_bathymetry/wms",
+        "name": "PANGAEA Bathymetry WMS",
+        "description": "OGC-compliant Web Map Service providing bathymetric ocean depth map layers.",
+        "documentation": "https://www.pangaea.de/tools/",
+        "provider": {
+          "@id": "https://www.pangaea.de"
+        },
+        "endpointURL": "https://maps.awi.de/services/common/pangaea_bathymetry/wms",
+        "encodingFormat": "image/png",
+        "conformsTo": "https://www.ogc.org/standards/wms"
+      },
+      {
+        "@type": "WebAPI",
+        "@id": "https://ws.pangaea.de/es/pangaea-terms/term/_search",
+        "name": "PANGAEA Term Dictionary API",
+        "description": "Elasticsearch-backed REST API for querying PANGAEA's controlled vocabulary and term dictionary.",
+        "documentation": "https://ws.pangaea.de/",
+        "provider": {
+          "@id": "https://www.pangaea.de"
+        },
+        "endpointURL": "https://ws.pangaea.de/es/pangaea-terms/term/_search",
+        "encodingFormat": "application/json"
+      }
+    ]
+  },
+  "subjectOf": {
+    "@type": "Dataset",
+    "name": "PANGAEA Geoscientific Dataset Repository",
+    "description": "Open access repository of over 445,000 geoscientific datasets including ocean measurements, climate records, sediment cores, and environmental data from scientific expeditions worldwide.",
+    "url": "https://www.pangaea.de/",
+    "license": "https://creativecommons.org/licenses/by/3.0/",
+    "publisher": {
+      "@id": "https://www.pangaea.de"
+    },
+    "keywords": [
+      "earth science",
+      "ocean data",
+      "climate records",
+      "environmental science",
+      "geoscience",
+      "open data",
+      "scientific data",
+      "oceanography",
+      "sediment cores",
+      "bathymetry"
+    ],
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Global",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "-90 -180 90 180"
+      }
+    },
+    "temporalCoverage": "2015-01-01/..",
+    "identifier": "https://www.re3data.org/repository/r3d100010313",
+    "includedInDataCatalog": {
+      "@type": "DataCatalog",
+      "name": "re3data.org",
+      "url": "https://www.re3data.org"
+    }
+  }
+}

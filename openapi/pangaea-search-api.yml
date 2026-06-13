@@ -1,0 +1,404 @@
+openapi: 3.1.0
+info:
+  title: PANGAEA Elasticsearch Search API
+  description: >
+    Full-text and faceted search across PANGAEA's 445,000+ geoscientific datasets
+    using Elasticsearch. Supports spatial bounding box queries, temporal filtering,
+    topic classification, and author/campaign searches. Returns dataset metadata
+    including DOIs, geographic coverage, temporal ranges, and data point counts.
+  version: 1.0.0
+  contact:
+    name: PANGAEA Technical Support
+    email: tech@pangaea.de
+  license:
+    name: CC-BY 3.0
+    url: https://creativecommons.org/licenses/by/3.0/
+  x-humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
+servers:
+  - url: https://ws.pangaea.de/es/pangaea
+    description: PANGAEA Elasticsearch Production Server
+tags:
+  - name: Search
+    description: Full-text and faceted dataset search
+  - name: Terms
+    description: Controlled vocabulary and term dictionary
+paths:
+  /panmd/_search:
+    get:
+      operationId: searchDatasets
+      summary: Search PANGAEA Datasets (GET)
+      description: >
+        Search PANGAEA's metadata index of 445,000+ geoscientific datasets using
+        Elasticsearch query DSL via GET request. Supports full-text search,
+        bounding box filters, temporal range filters, and faceted aggregations.
+      tags:
+        - Search
+      parameters:
+        - name: q
+          in: query
+          description: Elasticsearch query string (Lucene syntax supported)
+          required: false
+          schema:
+            type: string
+          example: "ocean temperature"
+        - name: size
+          in: query
+          description: Number of results to return (max 10000)
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 10000
+        - name: from
+          in: query
+          description: Offset for pagination
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: pretty
+          in: query
+          description: Pretty-print the JSON response
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Successful search response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+              example:
+                took: 12
+                timed_out: false
+                _shards:
+                  total: 5
+                  successful: 5
+                  skipped: 0
+                  failed: 0
+                hits:
+                  total: 445000
+                  max_score: 1.0
+                  hits:
+                    - _index: pangaea
+                      _type: panmd
+                      _id: "833575"
+                      _score: 1.0
+                      _source:
+                        URI: "https://doi.pangaea.de/10.1594/PANGAEA.833575"
+                        agg-author: ["Smith, J", "Jones, M"]
+                        agg-campaign: "SO234"
+                        minDateTime: "2014-03-01T00:00:00Z"
+                        maxDateTime: "2014-03-15T00:00:00Z"
+                        northBoundLatitude: 55.5
+                        southBoundLatitude: 50.2
+                        eastBoundLongitude: 10.1
+                        westBoundLongitude: 5.3
+                        nDataPoints: 1250
+    post:
+      operationId: searchDatasetsPost
+      summary: Search PANGAEA Datasets (POST)
+      description: >
+        Search PANGAEA's metadata index using a full Elasticsearch query DSL
+        body. This allows complex queries including boolean logic, geo-bounding
+        box filters, temporal range filters, aggregations, and sorting.
+      tags:
+        - Search
+      parameters:
+        - name: pretty
+          in: query
+          description: Pretty-print the JSON response
+          required: false
+          schema:
+            type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              bboxSearch:
+                summary: Bounding box search example
+                value:
+                  query:
+                    bool:
+                      must:
+                        - match_all: {}
+                      filter:
+                        - geo_bounding_box:
+                            meanPosition:
+                              top_left:
+                                lat: 60.0
+                                lon: -10.0
+                              bottom_right:
+                                lat: 45.0
+                                lon: 20.0
+              temporalSearch:
+                summary: Temporal range search example
+                value:
+                  query:
+                    bool:
+                      filter:
+                        - range:
+                            minDateTime:
+                              gte: "2010-01-01"
+                              lte: "2020-12-31"
+                  size: 20
+                  from: 0
+      responses:
+        "200":
+          description: Successful search response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /pangaea-terms/term/_search:
+    post:
+      operationId: searchTerms
+      summary: Search PANGAEA Term Dictionary
+      description: >
+        Search PANGAEA's controlled vocabulary and term dictionary used for
+        classifying datasets by topic, parameter, and method. Elasticsearch-backed
+        REST endpoint.
+      tags:
+        - Terms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            example:
+              query:
+                match:
+                  name: "temperature"
+              size: 10
+      responses:
+        "200":
+          description: Term search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermSearchResponse'
+
+components:
+  schemas:
+    SearchRequest:
+      type: object
+      description: Elasticsearch query DSL request body
+      properties:
+        query:
+          type: object
+          description: Elasticsearch query object (match, bool, range, geo_bounding_box, etc.)
+        size:
+          type: integer
+          description: Number of results to return
+          default: 10
+          minimum: 1
+          maximum: 10000
+        from:
+          type: integer
+          description: Starting offset for pagination
+          default: 0
+        sort:
+          type: array
+          description: Sort criteria
+          items:
+            type: object
+        aggs:
+          type: object
+          description: Aggregation definitions
+        _source:
+          oneOf:
+            - type: boolean
+            - type: array
+              items:
+                type: string
+          description: Fields to include in source
+
+    SearchResponse:
+      type: object
+      properties:
+        took:
+          type: integer
+          description: Query execution time in milliseconds
+        timed_out:
+          type: boolean
+          description: Whether the query timed out
+        _shards:
+          $ref: '#/components/schemas/ShardsInfo'
+        hits:
+          $ref: '#/components/schemas/HitsContainer'
+
+    ShardsInfo:
+      type: object
+      properties:
+        total:
+          type: integer
+        successful:
+          type: integer
+        skipped:
+          type: integer
+        failed:
+          type: integer
+
+    HitsContainer:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of matching documents
+        max_score:
+          type: number
+          format: float
+          description: Maximum relevance score
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetHit'
+
+    DatasetHit:
+      type: object
+      properties:
+        _index:
+          type: string
+        _type:
+          type: string
+        _id:
+          type: string
+        _score:
+          type: number
+          format: float
+        _source:
+          $ref: '#/components/schemas/DatasetMetadata'
+
+    DatasetMetadata:
+      type: object
+      description: PANGAEA dataset metadata document
+      properties:
+        URI:
+          type: string
+          format: uri
+          description: DOI URI of the dataset
+        parentURI:
+          type: string
+          format: uri
+          description: URI of the parent dataset (for datasets in a collection)
+        agg-author:
+          type: array
+          items:
+            type: string
+          description: Dataset authors
+        agg-campaign:
+          type: string
+          description: Scientific expedition/campaign name
+        agg-method:
+          type: string
+          description: Methods used for data collection
+        agg-location:
+          type: string
+          description: Geographic location name
+        agg-basis:
+          type: string
+          description: Vessel or platform name
+        agg-pubYear:
+          type: integer
+          description: Publication year
+        minDateTime:
+          type: string
+          format: date-time
+          description: Start date/time of data collection
+        maxDateTime:
+          type: string
+          format: date-time
+          description: End date/time of data collection
+        northBoundLatitude:
+          type: number
+          format: float
+          description: Northern latitude boundary of dataset coverage
+        southBoundLatitude:
+          type: number
+          format: float
+          description: Southern latitude boundary of dataset coverage
+        eastBoundLongitude:
+          type: number
+          format: float
+          description: Eastern longitude boundary of dataset coverage
+        westBoundLongitude:
+          type: number
+          format: float
+          description: Western longitude boundary of dataset coverage
+        meanPosition:
+          $ref: '#/components/schemas/GeoPoint'
+        geoCoverage:
+          type: object
+          description: GeoJSON envelope of geographic coverage
+        nDataPoints:
+          type: integer
+          description: Number of data points in the dataset
+        techKeyword:
+          type: array
+          items:
+            type: string
+          description: Technical keywords for classification
+        oaiSet:
+          type: array
+          items:
+            type: string
+          description: OAI-PMH set memberships
+
+    GeoPoint:
+      type: object
+      description: Geographic coordinate point
+      properties:
+        lat:
+          type: number
+          format: float
+          description: Latitude in decimal degrees
+        lon:
+          type: number
+          format: float
+          description: Longitude in decimal degrees
+
+    TermSearchResponse:
+      type: object
+      properties:
+        took:
+          type: integer
+        timed_out:
+          type: boolean
+        _shards:
+          $ref: '#/components/schemas/ShardsInfo'
+        hits:
+          type: object
+          properties:
+            total:
+              type: integer
+            hits:
+              type: array
+              items:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  _score:
+                    type: number
+                  _source:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: Term name
+                      abbreviation:
+                        type: string
+                        description: Term abbreviation
+                      unit:
+                        type: string
+                        description: Unit of measurement
+                      type:
+                        type: string
+                        description: Term type (parameter, method, topic)

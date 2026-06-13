@@ -1,0 +1,64 @@
+{
+  "title": "OAI-PMH Metadata Harvesting Examples",
+  "description": "Example requests demonstrating OAI-PMH 2.0 verbs for harvesting PANGAEA dataset metadata in various formats.",
+  "baseURL": "https://ws.pangaea.de/oai/provider",
+  "examples": [
+    {
+      "title": "Identify Repository",
+      "description": "Retrieve information about the PANGAEA repository.",
+      "verb": "Identify",
+      "url": "https://ws.pangaea.de/oai/provider?verb=Identify",
+      "curlExample": "curl 'https://ws.pangaea.de/oai/provider?verb=Identify'"
+    },
+    {
+      "title": "List Available Metadata Formats",
+      "description": "Retrieve all metadata formats supported by the PANGAEA OAI-PMH endpoint.",
+      "verb": "ListMetadataFormats",
+      "url": "https://ws.pangaea.de/oai/provider?verb=ListMetadataFormats",
+      "curlExample": "curl 'https://ws.pangaea.de/oai/provider?verb=ListMetadataFormats'"
+    },
+    {
+      "title": "List Dataset Sets",
+      "description": "Retrieve all OAI sets (topic categories) available for selective harvesting.",
+      "verb": "ListSets",
+      "url": "https://ws.pangaea.de/oai/provider?verb=ListSets",
+      "curlExample": "curl 'https://ws.pangaea.de/oai/provider?verb=ListSets'"
+    },
+    {
+      "title": "Harvest Records in Dublin Core Format",
+      "description": "Retrieve all records modified since 2024-01-01 in Dublin Core XML format.",
+      "verb": "ListRecords",
+      "parameters": {
+        "verb": "ListRecords",
+        "metadataPrefix": "oai_dc",
+        "from": "2024-01-01"
+      },
+      "url": "https://ws.pangaea.de/oai/provider?verb=ListRecords&metadataPrefix=oai_dc&from=2024-01-01",
+      "curlExample": "curl 'https://ws.pangaea.de/oai/provider?verb=ListRecords&metadataPrefix=oai_dc&from=2024-01-01'"
+    },
+    {
+      "title": "Get Single Record in JSON-LD Format",
+      "description": "Retrieve a specific PANGAEA dataset record in JSON-LD / Schema.org format.",
+      "verb": "GetRecord",
+      "parameters": {
+        "verb": "GetRecord",
+        "identifier": "oai:pangaea.de:doi:10.1594/PANGAEA.833575",
+        "metadataPrefix": "json-ld"
+      },
+      "url": "https://ws.pangaea.de/oai/provider?verb=GetRecord&identifier=oai:pangaea.de:doi:10.1594/PANGAEA.833575&metadataPrefix=json-ld",
+      "curlExample": "curl 'https://ws.pangaea.de/oai/provider?verb=GetRecord&identifier=oai:pangaea.de:doi:10.1594/PANGAEA.833575&metadataPrefix=json-ld'"
+    },
+    {
+      "title": "Harvest Ocean Atmosphere Topic Records",
+      "description": "Retrieve records from the topicOceanAtmosphere set in DataCite 4 format.",
+      "verb": "ListRecords",
+      "parameters": {
+        "verb": "ListRecords",
+        "metadataPrefix": "datacite4",
+        "set": "topicOceanAtmosphere"
+      },
+      "url": "https://ws.pangaea.de/oai/provider?verb=ListRecords&metadataPrefix=datacite4&set=topicOceanAtmosphere",
+      "curlExample": "curl 'https://ws.pangaea.de/oai/provider?verb=ListRecords&metadataPrefix=datacite4&set=topicOceanAtmosphere'"
+    }
+  ]
+}

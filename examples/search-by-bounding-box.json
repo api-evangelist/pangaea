@@ -1,0 +1,100 @@
+{
+  "title": "Search PANGAEA Datasets by Bounding Box",
+  "description": "Example Elasticsearch query to search for datasets within the North Atlantic Ocean bounding box, filtered to the last 10 years and sorted by publication year descending.",
+  "endpoint": "https://ws.pangaea.de/es/pangaea/panmd/_search",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "request": {
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "match_all": {}
+          }
+        ],
+        "filter": [
+          {
+            "geo_bounding_box": {
+              "meanPosition": {
+                "top_left": {
+                  "lat": 65.0,
+                  "lon": -80.0
+                },
+                "bottom_right": {
+                  "lat": 20.0,
+                  "lon": 20.0
+                }
+              }
+            }
+          },
+          {
+            "range": {
+              "minDateTime": {
+                "gte": "2015-01-01",
+                "lte": "2025-12-31"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "size": 10,
+    "from": 0,
+    "sort": [
+      {
+        "agg-pubYear": {
+          "order": "desc"
+        }
+      }
+    ],
+    "_source": [
+      "URI",
+      "agg-author",
+      "agg-campaign",
+      "minDateTime",
+      "maxDateTime",
+      "northBoundLatitude",
+      "southBoundLatitude",
+      "eastBoundLongitude",
+      "westBoundLongitude",
+      "nDataPoints"
+    ]
+  },
+  "response": {
+    "took": 45,
+    "timed_out": false,
+    "_shards": {
+      "total": 5,
+      "successful": 5,
+      "skipped": 0,
+      "failed": 0
+    },
+    "hits": {
+      "total": 12847,
+      "max_score": null,
+      "hits": [
+        {
+          "_index": "pangaea",
+          "_type": "panmd",
+          "_id": "912345",
+          "_score": null,
+          "_source": {
+            "URI": "https://doi.pangaea.de/10.1594/PANGAEA.912345",
+            "agg-author": ["Mueller, A", "Behrens, M"],
+            "agg-campaign": "MSM72",
+            "minDateTime": "2019-05-01T00:00:00Z",
+            "maxDateTime": "2019-05-28T00:00:00Z",
+            "northBoundLatitude": 62.5,
+            "southBoundLatitude": 55.2,
+            "eastBoundLongitude": -10.3,
+            "westBoundLongitude": -25.8,
+            "nDataPoints": 8450
+          },
+          "sort": [2024]
+        }
+      ]
+    }
+  }
+}
