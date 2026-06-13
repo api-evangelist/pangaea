@@ -1,0 +1,50 @@
+name: PANGAEA FinOps
+description: PANGAEA is a publicly funded open access scientific data repository. All API and data access services are provided free of charge. There are no usage-based costs, subscription fees, or metered billing for consumers of the API.
+model: open_access_public_funding
+cost_to_consumer: free
+funded_by:
+  - name: Alfred Wegener Institute (AWI)
+    url: https://www.awi.de/
+    description: German federal research institution for polar and marine research; co-operates PANGAEA
+  - name: MARUM - Center for Marine Environmental Sciences
+    url: https://www.marum.de/
+    description: University of Bremen research center; co-operates PANGAEA
+  - name: Helmholtz Association
+    url: https://www.helmholtz.de/
+    description: German national research organization; major funder of AWI and associated infrastructure
+cost_to_producer:
+  - name: Data Submission Fee
+    description: >
+      PANGAEA requests a financial contribution of 500 EUR (net) for data
+      submissions from projects that have dedicated funding available for
+      data publication. This is not mandatory and submissions from unfunded
+      projects are accepted at no charge.
+    amount: 500 EUR (net)
+    currency: EUR
+    required: false
+    url: https://wiki.pangaea.de/wiki/FAQ
+optimization_notes:
+  - >
+    Use OAI-PMH incremental harvesting with date ranges rather than
+    full re-harvest to reduce server load and network transfer costs
+    on your end.
+  - >
+    Use the Elasticsearch API's 'source' parameter to request only
+    the fields you need, reducing payload size.
+  - >
+    Apply geographic bounding box and temporal constraints in the
+    geo-parameter download service to retrieve only necessary data.
+  - >
+    Cache dataset metadata locally where appropriate, as most datasets
+    have stable DOIs and metadata changes infrequently.
+  - >
+    Use the pangaeapy Python or pangaear R clients which include
+    local caching to avoid redundant downloads.
+license_model:
+  description: >
+    Most PANGAEA datasets are published under Creative Commons licenses
+    (typically CC-BY 4.0), requiring attribution. A small number of datasets
+    may have more restrictive terms set by data submitters. License information
+    is embedded in dataset metadata.
+  url: https://www.pangaea.de/
+contact: tech@pangaea.de

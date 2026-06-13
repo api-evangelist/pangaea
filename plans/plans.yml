@@ -1,0 +1,38 @@
+name: PANGAEA Access Plans
+description: PANGAEA is a publicly funded open access data repository. All APIs and data services are provided free of charge to the scientific community and general public. There are no tiered commercial plans.
+plans:
+  - name: Open Access
+    description: All PANGAEA web services are freely accessible without registration or authentication for publicly available datasets. The majority of PANGAEA's 445,000+ datasets are openly accessible under open access licenses (typically CC-BY).
+    rate_limits:
+      - name: General Usage
+        description: No formally documented rate limits. Services are intended for research use. Bulk harvesting should use OAI-PMH rather than scraping individual dataset pages.
+    features:
+      - Full-text search via Elasticsearch API
+      - OAI-PMH metadata harvesting (JSON-LD, DataCite XML, Dublin Core, ISO 19115, DIF/FGDC)
+      - Data download via DOI-based filter service
+      - Data download via geographic/parameter filter service
+      - Bathymetry WMS access
+      - Term dictionary lookup
+      - Tab-delimited dataset downloads via DOI URL
+      - Python client (pangaeapy) via PyPI
+      - R client (pangaear) via CRAN
+    authentication: None required for public datasets
+    cost: Free
+    url: https://www.pangaea.de/about/services.php
+
+  - name: Restricted Dataset Access
+    description: A small number of datasets are temporarily password-protected under a moratorium period (typically up to 2 years) during which data submitters retain exclusive access. Access is granted by contacting PANGAEA directly.
+    rate_limits:
+      - name: Restricted
+        description: Access is controlled at the application layer with individual user authorization typically limited to a two-year access duration.
+    features:
+      - Access to moratorium-protected datasets during embargo period
+      - Same API access as Open Access tier once restrictions are lifted
+    authentication: Application-layer individual user authorization
+    cost: Free (contact required)
+    url: https://www.pangaea.de/
+
+  - name: Data Submission
+    description: Organizations or projects wishing to publish data through PANGAEA may be asked for a financial contribution toward curation and publication costs if their project has dedicated funding available.
+    cost: 500 EUR (net) suggested contribution for funded projects; free for unfunded submissions
+    url: https://wiki.pangaea.de/wiki/FAQ

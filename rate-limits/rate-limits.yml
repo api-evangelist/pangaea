@@ -1,0 +1,64 @@
+name: PANGAEA Rate Limits
+description: PANGAEA does not publish formal rate limits for its public APIs. As a publicly funded scientific data repository, services are designed for research use. Bulk access should use the OAI-PMH harvesting endpoint rather than direct scraping.
+rate_limits:
+  - name: Elasticsearch Search API
+    endpoint: https://ws.pangaea.de/es/pangaea/panmd/_search
+    documented: false
+    notes: >
+      No formally documented rate limit. The Elasticsearch API supports pagination
+      with a maximum of 10,000 results per query (size parameter). Use from/size
+      for pagination. Intended for research query workloads, not continuous
+      high-frequency polling.
+
+  - name: OAI-PMH Metadata Harvesting
+    endpoint: https://ws.pangaea.de/oai/provider
+    documented: false
+    notes: >
+      Preferred method for bulk metadata access. OAI-PMH supports resumption
+      tokens for large result sets. Best practice is to use incremental harvesting
+      with date-range parameters rather than full re-harvest. Records available
+      from January 1, 2015 onward with second-level timestamp granularity.
+
+  - name: Data Download Service (DOI Filter)
+    endpoint: https://ws.pangaea.de/dds-fdp/rest/panquery
+    documented: false
+    notes: >
+      No formally documented rate limit. Each request retrieves data for a single
+      dataset DOI. Supports column selection and value filtering to reduce
+      data transfer volume. Use parameter filters to limit response size.
+
+  - name: Data Download Service (Geo/Parameter Filter)
+    endpoint: https://ws.pangaea.de/dds-fgp/rest/dwhquery
+    documented: false
+    notes: >
+      No formally documented rate limit. Queries span cross-dataset data
+      warehouse. Use tight bounding boxes and date/depth constraints to
+      limit result size and server load. Requires internal PANGAEA parameter
+      IDs for the pangaeaParameterIDs field.
+
+  - name: Direct Dataset Download (DOI URL)
+    endpoint: https://doi.pangaea.de/10.1594/PANGAEA.{id}
+    documented: false
+    notes: >
+      Tab-delimited dataset files are directly downloadable via DOI URLs.
+      Large datasets or dataset collections are provided as ZIP archives.
+      No documented rate limit but bulk downloading should be paced
+      to avoid server overload.
+
+  - name: Bathymetry WMS
+    endpoint: https://maps.awi.de/services/common/pangaea_bathymetry/wms
+    documented: false
+    notes: >
+      OGC WMS endpoint hosted by AWI. No documented rate limits.
+      Standard OGC WMS request patterns apply (GetCapabilities,
+      GetMap, GetFeatureInfo).
+
+general_notes: >
+  PANGAEA is a publicly funded repository operated by AWI (Alfred Wegener Institute)
+  and MARUM (Center for Marine Environmental Sciences, University of Bremen).
+  The service is designed for scientific research access. For high-volume or
+  production use cases, contact tech@pangaea.de to discuss appropriate access
+  patterns and any applicable service agreements.
+
+contact: tech@pangaea.de
+url: https://www.pangaea.de/about/services.php
