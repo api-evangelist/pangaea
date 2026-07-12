@@ -123,3 +123,8 @@ modified: 2026-06-13
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+common:
+- type: VulnerabilityDisclosure
+  url: security/pangaea-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/pangaea-domain-security.yml

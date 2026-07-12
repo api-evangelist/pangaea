@@ -1,0 +1,31 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: wiki.pangaea.de
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  4 05:40:36 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: ws.pangaea.de
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  4 05:40:36 2026 GMT
+  hsts: false
+- host: www.pangaea.de
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  4 05:40:36 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: pangaea.de
+  dnssec: true
+  caa:
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.dfn.de"
+  - 0 issuewild "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
