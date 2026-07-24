@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: PANGAEA Data Download Services DOI Filter Terms API
+  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
+
+    '
+  version: 1.0.0
+  contact:
+    name: PANGAEA Technical Support
+    email: tech@pangaea.de
+  license:
+    name: CC-BY 3.0
+    url: https://creativecommons.org/licenses/by/3.0/
+  x-humanURL: https://www.pangaea.de/about/services.php
+servers:
+- url: https://ws.pangaea.de
+  description: PANGAEA Web Services Production Server
+tags:
+- name: Terms
+  description: Controlled vocabulary and term dictionary
+paths:
+  /pangaea-terms/term/_search:
+    post:
+      operationId: searchTerms
+      summary: Search PANGAEA Term Dictionary
+      description: 'Search PANGAEA''s controlled vocabulary and term dictionary used for classifying datasets by topic, parameter, and method. Elasticsearch-backed REST endpoint.
+
+        '
+      tags:
+      - Terms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            example:
+              query:
+                match:
+                  name: temperature
+              size: 10
+      responses:
+        '200':
+          description: Term search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermSearchResponse'
+components:
+  schemas:
+    ShardsInfo:
+      type: object
+      properties:
+        total:
+          type: integer
+        successful:
+          type: integer
+        skipped:
+          type: integer
+        failed:
+          type: integer
+    SearchRequest:
+      type: object
+      description: Elasticsearch query DSL request body
+      properties:
+        query:
+          type: object
+          description: Elasticsearch query object (match, bool, range, geo_bounding_box, etc.)
+        size:
+          type: integer
+          description: Number of results to return
+          default: 10
+          minimum: 1
+          maximum: 10000
+        from:
+          type: integer
+          description: Starting offset for pagination
+          default: 0
+        sort:
+          type: array
+          description: Sort criteria
+          items:
+            type: object
+        aggs:
+          type: object
+          description: Aggregation definitions
+        _source:
+          oneOf:
+          - type: boolean
+          - type: array
+            items:
+              type: string
+          description: Fields to include in source
+    TermSearchResponse:
+      type: object
+      properties:
+        took:
+          type: integer
+        timed_out:
+          type: boolean
+        _shards:
+          $ref: '#/components/schemas/ShardsInfo'
+        hits:
+          type: object
+          properties:
+            total:
+              type: integer
+            hits:
+              type: array
+              items:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  _score:
+                    type: number
+                  _source:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: Term name
+                      abbreviation:
+                        type: string
+                        description: Term abbreviation
+                      unit:
+                        type: string
+                        description: Unit of measurement
+                      type:
+                        type: string
+                        description: Term type (parameter, method, topic)

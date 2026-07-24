@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: PANGAEA Data Download Services DOI Filter OAI-PMH API
+  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
+
+    '
+  version: 1.0.0
+  contact:
+    name: PANGAEA Technical Support
+    email: tech@pangaea.de
+  license:
+    name: CC-BY 3.0
+    url: https://creativecommons.org/licenses/by/3.0/
+  x-humanURL: https://www.pangaea.de/about/services.php
+servers:
+- url: https://ws.pangaea.de
+  description: PANGAEA Web Services Production Server
+tags:
+- name: OAI-PMH
+  description: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+paths:
+  /provider:
+    get:
+      operationId: oaiPmhRequest
+      summary: OAI-PMH Request
+      description: 'OAI-PMH 2.0 endpoint supporting all standard verbs: Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, and GetRecord. All responses are returned as XML.
+
+        '
+      tags:
+      - OAI-PMH
+      parameters:
+      - name: verb
+        in: query
+        description: OAI-PMH verb specifying the request type
+        required: true
+        schema:
+          type: string
+          enum:
+          - Identify
+          - ListMetadataFormats
+          - ListSets
+          - ListIdentifiers
+          - ListRecords
+          - GetRecord
+        example: Identify
+      - name: metadataPrefix
+        in: query
+        description: 'Metadata format to return. Required for ListIdentifiers, ListRecords, and GetRecord verbs.
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - json-ld
+          - datacite3
+          - datacite4
+          - oai_dc
+          - iso19139
+          - dif
+        example: oai_dc
+      - name: identifier
+        in: query
+        description: 'Unique identifier of the record to retrieve. Required for GetRecord verb. Format: oai:pangaea.de:doi:10.1594/PANGAEA.{id}
+
+          '
+        required: false
+        schema:
+          type: string
+        example: oai:pangaea.de:doi:10.1594/PANGAEA.833575
+      - name: set
+        in: query
+        description: 'Set specification for selective harvesting. Optional for ListIdentifiers and ListRecords verbs.
+
+          '
+        required: false
+        schema:
+          type: string
+        example: topicOceanAtmosphere
+      - name: from
+        in: query
+        description: 'UTC date for selective harvesting - only return records modified on or after this date. ISO 8601 format.
+
+          '
+        required: false
+        schema:
+          type: string
+          format: date
+        example: '2020-01-01'
+      - name: until
+        in: query
+        description: 'UTC date for selective harvesting - only return records modified on or before this date. ISO 8601 format.
+
+          '
+        required: false
+        schema:
+          type: string
+          format: date
+        example: '2020-12-31'
+      - name: resumptionToken
+        in: query
+        description: 'Token for resuming a previous incomplete list request. Mutually exclusive with other parameters except verb.
+
+          '
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OAI-PMH XML response
+          content:
+            text/xml:
+              schema:
+                type: string
+                description: OAI-PMH 2.0 compliant XML response
+              examples:
+                identifyResponse:
+                  summary: Identify verb response
+                  value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\">\n  <responseDate>2026-06-13T00:00:00Z</responseDate>\n  <request verb=\"Identify\">https://ws.pangaea.de/oai/provider</request>\n  <Identify>\n    <repositoryName>PANGAEA</repositoryName>\n    <baseURL>https://ws.pangaea.de/oai/provider</baseURL>\n    <protocolVersion>2.0</protocolVersion>\n    <adminEmail>tech@pangaea.de</adminEmail>\n    <earliestDatestamp>2015-01-01</earliestDatestamp>\n    <deletedRecord>no</deletedRecord>\n    <granularity>YYYY-MM-DD</granularity>\n  </Identify>\n</OAI-PMH>\n"
+                listMetadataFormats:
+                  summary: ListMetadataFormats response
+                  value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\">\n  <responseDate>2026-06-13T00:00:00Z</responseDate>\n  <request verb=\"ListMetadataFormats\">https://ws.pangaea.de/oai/provider</request>\n  <ListMetadataFormats>\n    <metadataFormat>\n      <metadataPrefix>oai_dc</metadataPrefix>\n      <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>\n      <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>\n    </metadataFormat>\n    <metadataFormat>\n      <metadataPrefix>datacite4</metadataPrefix>\n      <schema>http://schema.datacite.org/meta/kernel-4/metadata.xsd</schema>\n      <metadataNamespace>http://datacite.org/schema/kernel-4</metadataNamespace>\n    </metadataFormat>\n    <metadataFormat>\n      <metadataPrefix>json-ld</metadataPrefix>\n      <schema>https://schema.org/Dataset</schema>\n      <metadataNamespace>https://schema.org/</metadataNamespace>\n    </metadataFormat>\n  </ListMetadataFormats>\n</OAI-PMH>\n"

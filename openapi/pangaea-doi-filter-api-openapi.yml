@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: PANGAEA Data Download Services DOI Filter API
+  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
+
+    '
+  version: 1.0.0
+  contact:
+    name: PANGAEA Technical Support
+    email: tech@pangaea.de
+  license:
+    name: CC-BY 3.0
+    url: https://creativecommons.org/licenses/by/3.0/
+  x-humanURL: https://www.pangaea.de/about/services.php
+servers:
+- url: https://ws.pangaea.de
+  description: PANGAEA Web Services Production Server
+tags:
+- name: DOI Filter
+  description: Filter dataset data by DOI and parameter values
+paths:
+  /dds-fdp/rest/panquery:
+    get:
+      operationId: queryByDOI
+      summary: Query Dataset by DOI
+      description: 'Retrieve tabular dataset data filtered by dataset DOI and optional parameter values. Supports column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic. Returns tab-delimited data files.
+
+        '
+      tags:
+      - DOI Filter
+      parameters:
+      - name: datasetDOI
+        in: query
+        description: 'DOI of the PANGAEA dataset to retrieve. When used alone, returns the entire dataset. Can be the full DOI URI or just the suffix.
+
+          '
+        required: true
+        schema:
+          type: string
+        example: 10.1594/PANGAEA.833575
+      - name: columns
+        in: query
+        description: 'Comma-delimited list of column numbers to include in the response (no spaces). If omitted, all columns are returned.
+
+          '
+        required: false
+        schema:
+          type: string
+        example: 1,2,3,5
+      - name: filterParameterValue
+        in: query
+        description: 'Filter rows by parameter value. Format is "column:value" or "column:>value" or "column:<value". Multiple filters use AND logic; multiple values within a filter use OR logic. Can be repeated.
+
+          '
+        required: false
+        schema:
+          type: string
+        example: 3:>21
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: Tab-delimited dataset data
+          content:
+            text/tab-separated-values:
+              schema:
+                type: string
+                description: Tab-delimited data file with header row
+              example: "Date/Time\tLatitude\tLongitude\tDepth water [m]\tTemp [°C]\n2014-03-01T12:00:00\t52.5\t8.3\t100\t8.5\n2014-03-01T13:00:00\t52.5\t8.3\t200\t6.2\n"
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Dataset not found

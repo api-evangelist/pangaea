@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: PANGAEA Data Download Services DOI Filter Geo Filter API
+  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
+
+    '
+  version: 1.0.0
+  contact:
+    name: PANGAEA Technical Support
+    email: tech@pangaea.de
+  license:
+    name: CC-BY 3.0
+    url: https://creativecommons.org/licenses/by/3.0/
+  x-humanURL: https://www.pangaea.de/about/services.php
+servers:
+- url: https://ws.pangaea.de
+  description: PANGAEA Web Services Production Server
+tags:
+- name: Geo Filter
+  description: Filter cross-dataset data by geographic and temporal constraints
+paths:
+  /dds-fgp/rest/dwhquery:
+    get:
+      operationId: queryByGeoParameters
+      summary: Query Data by Geographic Parameters
+      description: 'Retrieve geoscientific measurements across multiple datasets filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements from specific ocean regions, time periods, or depth intervals.
+
+        '
+      tags:
+      - Geo Filter
+      parameters:
+      - name: westBoundLon
+        in: query
+        description: Western boundary longitude in decimal degrees (-180 to 180)
+        required: true
+        schema:
+          type: number
+          format: float
+          minimum: -180
+          maximum: 180
+        example: -10.0
+      - name: southBoundLat
+        in: query
+        description: Southern boundary latitude in decimal degrees (-90 to 90)
+        required: true
+        schema:
+          type: number
+          format: float
+          minimum: -90
+          maximum: 90
+        example: 45.0
+      - name: eastBoundLon
+        in: query
+        description: Eastern boundary longitude in decimal degrees (-180 to 180)
+        required: true
+        schema:
+          type: number
+          format: float
+          minimum: -180
+          maximum: 180
+        example: 20.0
+      - name: northBoundLat
+        in: query
+        description: Northern boundary latitude in decimal degrees (-90 to 90)
+        required: true
+        schema:
+          type: number
+          format: float
+          minimum: -90
+          maximum: 90
+        example: 60.0
+      - name: pangaeaParameterIDs
+        in: query
+        description: 'Comma-separated list of internal PANGAEA parameter IDs to retrieve. Parameter IDs can be found via the PANGAEA Term Dictionary API.
+
+          '
+        required: true
+        schema:
+          type: string
+        example: 1350,1351
+      - name: dateTimeMin
+        in: query
+        description: Start date/time filter in ISO 8601 format
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2010-01-01T00:00:00Z'
+      - name: dateTimeMax
+        in: query
+        description: End date/time filter in ISO 8601 format
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2020-12-31T23:59:59Z'
+      - name: depthMin
+        in: query
+        description: Minimum water depth in meters (below sea surface)
+        required: false
+        schema:
+          type: number
+          format: float
+        example: 0.0
+      - name: depthMax
+        in: query
+        description: Maximum water depth in meters (below sea surface)
+        required: false
+        schema:
+          type: number
+          format: float
+        example: 500.0
+      - name: depthMinSed
+        in: query
+        description: Minimum sediment/rock depth in meters below seafloor
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: depthMaxSed
+        in: query
+        description: Maximum sediment/rock depth in meters below seafloor
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: projectID
+        in: query
+        description: Internal PANGAEA project identifier to filter results
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Tab-delimited cross-dataset measurements
+          content:
+            text/tab-separated-values:
+              schema:
+                type: string
+                description: 'Tab-delimited file with columns for Date/Time, Latitude, Longitude, Water Depth, the requested parameters, and data source (dataset DOI).
+
+                  '
+              example: "Date/Time\tLatitude\tLongitude\tDepth water [m]\tTemp [°C]\tSource\n2015-06-15T08:00:00\t52.3\t8.1\t50\t12.3\thttps://doi.pangaea.de/10.1594/PANGAEA.833575\n2016-07-20T10:30:00\t53.1\t9.2\t75\t11.8\thttps://doi.pangaea.de/10.1594/PANGAEA.912345\n"
+        '400':
+          description: Bad request - invalid or missing parameters
+          content:
+            text/plain:
+              schema:
+                type: string
