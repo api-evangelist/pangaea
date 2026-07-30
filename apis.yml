@@ -1,5 +1,17 @@
 name: PANGAEA
 description: PANGAEA is a data publisher and library for earth and environmental science, providing open access to geoscientific datasets including ocean data, climate records, sediment cores, and environmental measurements from scientific expeditions worldwide.
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 image: https://www.pangaea.de/assets/img/pangaea-logo.png
 tags:
   - Earth Science
@@ -16,109 +28,148 @@ contact:
   - FN: PANGAEA Technical Support
     email: tech@pangaea.de
 apis:
-  - name: PANGAEA Elasticsearch Search API
-    description: Full-text and faceted search across PANGAEA's 445,000+ geoscientific datasets using Elasticsearch. Supports spatial bounding box queries, temporal filtering, topic classification, and author/campaign searches. Returns dataset metadata including DOIs, geographic coverage, temporal ranges, and data point counts.
-    humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
-    baseURL: https://ws.pangaea.de/es/pangaea/panmd/_search
-    tags:
-      - Search
-      - Datasets
-      - Metadata
-      - Elasticsearch
-    properties:
-      - type: Documentation
-        url: https://wiki.pangaea.de/wiki/PANGAEA_search
-      - type: OpenAPI
-        url: https://ws.pangaea.de/es/pangaea/panmd/_search
-    contact:
-      - FN: PANGAEA Technical Support
-        email: tech@pangaea.de
-
-  - name: PANGAEA OAI-PMH Metadata Harvesting API
-    description: OAI-PMH 2.0 compliant endpoint for harvesting metadata from PANGAEA's dataset repository. Supports multiple metadata formats including JSON-LD, DataCite XML, Dublin Core XML, ISO 19115/19139, and DIF/FGDC. Enables systematic harvesting of dataset records from January 2015 onward.
-    humanURL: https://www.pangaea.de/about/services.php
-    baseURL: https://ws.pangaea.de/oai/provider
-    tags:
-      - OAI-PMH
-      - Metadata Harvesting
-      - Dublin Core
-      - DataCite
-      - ISO 19115
-    properties:
-      - type: Documentation
-        url: https://www.pangaea.de/about/services.php
-      - type: OpenAPI
-        url: https://ws.pangaea.de/oai/provider?verb=Identify
-    contact:
-      - FN: PANGAEA Technical Support
-        email: tech@pangaea.de
-
-  - name: PANGAEA Data Download Service - Filter by DOI
-    description: REST service for retrieving tabular dataset data filtered by dataset DOI and parameter values. Supports column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic. Returns tab-delimited data files.
-    humanURL: https://ws.pangaea.de/dds-fdp/
-    baseURL: https://ws.pangaea.de/dds-fdp/rest/panquery
-    tags:
-      - Data Download
-      - Tabular Data
-      - DOI
-      - Filtering
-    properties:
-      - type: Documentation
-        url: https://ws.pangaea.de/dds-fdp/
-    contact:
-      - FN: PANGAEA Technical Support
-        email: tech@pangaea.de
-
-  - name: PANGAEA Data Download Service - Filter by Geo Parameters
-    description: REST service for retrieving geoscientific measurements filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements from specific ocean regions, time periods, or depth intervals.
-    humanURL: https://ws.pangaea.de/dds-fgp/
-    baseURL: https://ws.pangaea.de/dds-fgp/rest/dwhquery
-    tags:
-      - Data Download
-      - Geospatial
-      - Bounding Box
-      - Ocean Data
-      - Depth Filtering
-    properties:
-      - type: Documentation
-        url: https://ws.pangaea.de/dds-fgp/
-    contact:
-      - FN: PANGAEA Technical Support
-        email: tech@pangaea.de
-
-  - name: PANGAEA Bathymetry WMS
-    description: OGC-compliant Web Map Service providing bathymetric (ocean depth) map layers for integration into GIS software. Hosted by AWI and based on PANGAEA bathymetry data collected from scientific expeditions.
-    humanURL: https://www.pangaea.de/tools/
-    baseURL: https://maps.awi.de/services/common/pangaea_bathymetry/wms
-    tags:
-      - WMS
-      - Bathymetry
-      - OGC
-      - GIS
-      - Ocean Depth
-    properties:
-      - type: Documentation
-        url: https://www.pangaea.de/tools/
-    contact:
-      - FN: PANGAEA Technical Support
-        email: tech@pangaea.de
-
-  - name: PANGAEA Term Dictionary API
-    description: Elasticsearch-backed REST API for querying PANGAEA's controlled vocabulary and term dictionary used for classifying datasets by topic, parameter, and method.
-    humanURL: https://ws.pangaea.de/
-    baseURL: https://ws.pangaea.de/es/pangaea-terms/term/_search
-    tags:
-      - Controlled Vocabulary
-      - Terms
-      - Dictionary
-      - Classification
-    properties:
-      - type: Documentation
-        url: https://ws.pangaea.de/
-    contact:
-      - FN: PANGAEA Technical Support
-        email: tech@pangaea.de
-
+- name: PANGAEA Data Download Service - Filter by DOI
+  description: >-
+    REST service for retrieving tabular dataset data filtered by dataset DOI and parameter values. Supports
+    column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic.
+    Returns tab-delimited data files.
+  humanURL: https://ws.pangaea.de/dds-fdp/
+  baseURL: https://ws.pangaea.de/dds-fdp/rest/panquery
+  tags:
+  - Data Download
+  - Tabular Data
+  - DOI
+  - Filtering
+  properties:
+  - type: Documentation
+    url: https://ws.pangaea.de/dds-fdp/
+  contact:
+  - FN: PANGAEA Technical Support
+    email: tech@pangaea.de
+- name: PANGAEA Data Download Service - Filter by Geo Parameters
+  description: >-
+    REST service for retrieving geoscientific measurements filtered by geographic bounding box, temporal
+    range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements
+    from specific ocean regions, time periods, or depth intervals.
+  humanURL: https://ws.pangaea.de/dds-fgp/
+  baseURL: https://ws.pangaea.de/dds-fgp/rest/dwhquery
+  tags:
+  - Data Download
+  - Geospatial
+  - Bounding Box
+  - Ocean Data
+  - Depth Filtering
+  properties:
+  - type: Documentation
+    url: https://ws.pangaea.de/dds-fgp/
+  contact:
+  - FN: PANGAEA Technical Support
+    email: tech@pangaea.de
+- name: PANGAEA Bathymetry WMS
+  description: >-
+    OGC-compliant Web Map Service providing bathymetric (ocean depth) map layers for integration into
+    GIS software. Hosted by AWI and based on PANGAEA bathymetry data collected from scientific expeditions.
+  humanURL: https://www.pangaea.de/tools/
+  baseURL: https://maps.awi.de/services/common/pangaea_bathymetry/wms
+  tags:
+  - WMS
+  - Bathymetry
+  - OGC
+  - GIS
+  - Ocean Depth
+  properties:
+  - type: Documentation
+    url: https://www.pangaea.de/tools/
+  contact:
+  - FN: PANGAEA Technical Support
+    email: tech@pangaea.de
+- name: PANGAEA Term Dictionary API
+  description: >-
+    Elasticsearch-backed REST API for querying PANGAEA's controlled vocabulary and term dictionary used
+    for classifying datasets by topic, parameter, and method.
+  humanURL: https://ws.pangaea.de/
+  baseURL: https://ws.pangaea.de/es/pangaea-terms/term/_search
+  tags:
+  - Controlled Vocabulary
+  - Terms
+  - Dictionary
+  - Classification
+  properties:
+  - type: Documentation
+    url: https://ws.pangaea.de/
+  contact:
+  - FN: PANGAEA Technical Support
+    email: tech@pangaea.de
+- aid: pangaea:pangaea-doi-filter-api
+  name: PANGAEA DOI Filter API
+  description: Filter dataset data by DOI and parameter values
+  humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
+  baseURL: https://ws.pangaea.de/es/pangaea/panmd/_search
+  tags:
+  - DOI Filter
+  properties:
+  - type: OpenAPI
+    url: openapi/pangaea-doi-filter-api-openapi.yml
+  - type: Documentation
+    url: https://wiki.pangaea.de/wiki/PANGAEA_search
+  - type: Documentation
+    url: https://www.pangaea.de/about/services.php
+- aid: pangaea:pangaea-geo-filter-api
+  name: PANGAEA Geo Filter API
+  description: Filter cross-dataset data by geographic and temporal constraints
+  humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
+  baseURL: https://ws.pangaea.de/es/pangaea/panmd/_search
+  tags:
+  - Geo Filter
+  properties:
+  - type: OpenAPI
+    url: openapi/pangaea-geo-filter-api-openapi.yml
+  - type: Documentation
+    url: https://wiki.pangaea.de/wiki/PANGAEA_search
+  - type: Documentation
+    url: https://www.pangaea.de/about/services.php
+- aid: pangaea:pangaea-oai-pmh-api
+  name: PANGAEA OAI-PMH API
+  description: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+  humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
+  baseURL: https://ws.pangaea.de/es/pangaea/panmd/_search
+  tags:
+  - OAI-PMH
+  properties:
+  - type: OpenAPI
+    url: openapi/pangaea-oai-pmh-api-openapi.yml
+  - type: Documentation
+    url: https://wiki.pangaea.de/wiki/PANGAEA_search
+  - type: Documentation
+    url: https://www.pangaea.de/about/services.php
+- aid: pangaea:pangaea-search-api
+  name: PANGAEA Search API
+  description: Full-text and faceted dataset search
+  humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
+  baseURL: https://ws.pangaea.de/es/pangaea/panmd/_search
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/pangaea-search-api-openapi.yml
+  - type: Documentation
+    url: https://wiki.pangaea.de/wiki/PANGAEA_search
+  - type: Documentation
+    url: https://www.pangaea.de/about/services.php
+- aid: pangaea:pangaea-terms-api
+  name: PANGAEA Terms API
+  description: Controlled vocabulary and term dictionary
+  humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
+  baseURL: https://ws.pangaea.de/es/pangaea/panmd/_search
+  tags:
+  - Terms
+  properties:
+  - type: OpenAPI
+    url: openapi/pangaea-terms-api-openapi.yml
+  - type: Documentation
+    url: https://wiki.pangaea.de/wiki/PANGAEA_search
+  - type: Documentation
+    url: https://www.pangaea.de/about/services.php
 modified: 2026-06-13
 maintainers:
   - FN: Kin Lane
