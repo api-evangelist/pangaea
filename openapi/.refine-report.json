@@ -1,0 +1,22 @@
+{
+  "provider": "pangaea",
+  "sources": [
+    "pangaea-doi-filter-api-openapi.yml",
+    "pangaea-geo-filter-api-openapi.yml",
+    "pangaea-oai-pmh-api-openapi.yml",
+    "pangaea-search-api-openapi.yml",
+    "pangaea-terms-api-openapi.yml"
+  ],
+  "outputs": [
+    "pangaea-doi-filter-api-openapi.yml",
+    "pangaea-geo-filter-api-openapi.yml",
+    "pangaea-oai-pmh-api-openapi.yml",
+    "pangaea-search-api-openapi.yml",
+    "pangaea-terms-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
