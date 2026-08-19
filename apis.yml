@@ -1,5 +1,6 @@
 name: PANGAEA
 description: PANGAEA is a data publisher and library for earth and environmental science, providing open access to geoscientific datasets including ocean data, climate records, sediment cores, and environmental measurements from scientific expeditions worldwide.
+specificationVersion: '0.23'
 accessModel:
   pricing: free
   onboarding: unknown
