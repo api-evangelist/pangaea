@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PANGAEA Data Download Services DOI Filter Geo Filter API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geo Filter",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Data by Geographic Parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ws.pangaea.de/dds-fgp/rest/dwhquery",
+            "params": [
+              {
+                "name": "westBoundLon",
+                "value": "-10",
+                "type": "query",
+                "description": "Western boundary longitude in decimal degrees (-180 to 180)"
+              },
+              {
+                "name": "southBoundLat",
+                "value": "45",
+                "type": "query",
+                "description": "Southern boundary latitude in decimal degrees (-90 to 90)"
+              },
+              {
+                "name": "eastBoundLon",
+                "value": "20",
+                "type": "query",
+                "description": "Eastern boundary longitude in decimal degrees (-180 to 180)"
+              },
+              {
+                "name": "northBoundLat",
+                "value": "60",
+                "type": "query",
+                "description": "Northern boundary latitude in decimal degrees (-90 to 90)"
+              },
+              {
+                "name": "pangaeaParameterIDs",
+                "value": "1350,1351",
+                "type": "query",
+                "description": "Comma-separated list of internal PANGAEA parameter IDs to retrieve. Parameter IDs can be found via the PANGAEA Term Dictionary API.\n"
+              },
+              {
+                "name": "dateTimeMin",
+                "value": "2010-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Start date/time filter in ISO 8601 format"
+              },
+              {
+                "name": "dateTimeMax",
+                "value": "2020-12-31T23:59:59Z",
+                "type": "query",
+                "description": "End date/time filter in ISO 8601 format"
+              },
+              {
+                "name": "depthMin",
+                "value": "0",
+                "type": "query",
+                "description": "Minimum water depth in meters (below sea surface)"
+              },
+              {
+                "name": "depthMax",
+                "value": "500",
+                "type": "query",
+                "description": "Maximum water depth in meters (below sea surface)"
+              },
+              {
+                "name": "depthMinSed",
+                "value": "",
+                "type": "query",
+                "description": "Minimum sediment/rock depth in meters below seafloor"
+              },
+              {
+                "name": "depthMaxSed",
+                "value": "",
+                "type": "query",
+                "description": "Maximum sediment/rock depth in meters below seafloor"
+              },
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "query",
+                "description": "Internal PANGAEA project identifier to filter results"
+              }
+            ]
+          },
+          "docs": "Retrieve geoscientific measurements across multiple datasets filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements from specific ocean regions, time periods, or depth intervals.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

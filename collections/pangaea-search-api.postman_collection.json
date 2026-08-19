@@ -1,0 +1,251 @@
+{
+  "item": [
+    {
+      "id": "71aeb0bc-2ece-4e7c-abe8-7d9071c7f9c8",
+      "name": "Search",
+      "description": {
+        "content": "Full-text and faceted dataset search",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c714e0bc-6479-432f-a887-a37842d0d28d",
+          "name": "Search PANGAEA Datasets (GET)",
+          "request": {
+            "name": "Search PANGAEA Datasets (GET)",
+            "description": {
+              "content": "Search PANGAEA's metadata index of 445,000+ geoscientific datasets using Elasticsearch query DSL via GET request. Supports full-text search, bounding box filters, temporal range filters, and faceted aggregations.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "panmd",
+                "_search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Elasticsearch query string (Lucene syntax supported)"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Number of results to return (max 10000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "0",
+                  "description": "Offset for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "pretty",
+                  "value": "<boolean>",
+                  "description": "Pretty-print the JSON response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5cc47fc3-a9d1-4628-b4af-2fda1b79acc9",
+              "name": "Successful search response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "panmd",
+                    "_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ocean temperature"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pretty",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"took\": 12,\n  \"timed_out\": false,\n  \"_shards\": {\n    \"total\": 5,\n    \"successful\": 5,\n    \"skipped\": 0,\n    \"failed\": 0\n  },\n  \"hits\": {\n    \"total\": 445000,\n    \"max_score\": 1,\n    \"hits\": [\n      {\n        \"_index\": \"pangaea\",\n        \"_type\": \"panmd\",\n        \"_id\": \"833575\",\n        \"_score\": 1,\n        \"_source\": {\n          \"URI\": \"https://doi.pangaea.de/10.1594/PANGAEA.833575\",\n          \"agg-author\": [\n            \"Smith, J\",\n            \"Jones, M\"\n          ],\n          \"agg-campaign\": \"SO234\",\n          \"minDateTime\": \"2014-03-01T00:00:00Z\",\n          \"maxDateTime\": \"2014-03-15T00:00:00Z\",\n          \"northBoundLatitude\": 55.5,\n          \"southBoundLatitude\": 50.2,\n          \"eastBoundLongitude\": 10.1,\n          \"westBoundLongitude\": 5.3,\n          \"nDataPoints\": 1250\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d170480-c477-44aa-b75e-584854b21071",
+          "name": "Search PANGAEA Datasets (POST)",
+          "request": {
+            "name": "Search PANGAEA Datasets (POST)",
+            "description": {
+              "content": "Search PANGAEA's metadata index using a full Elasticsearch query DSL body. This allows complex queries including boolean logic, geo-bounding box filters, temporal range filters, aggregations, and sorting.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "panmd",
+                "_search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pretty",
+                  "value": "<boolean>",
+                  "description": "Pretty-print the JSON response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<object>\",\n  \"size\": 10,\n  \"from\": 0,\n  \"sort\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"aggs\": \"<object>\",\n  \"_source\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bb29f85-cc5f-44fb-a97f-8112822a7152",
+              "name": "Successful search response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "panmd",
+                    "_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pretty",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"match_all\": {}\n        }\n      ],\n      \"filter\": [\n        {\n          \"geo_bounding_box\": {\n            \"meanPosition\": {\n              \"top_left\": {\n                \"lat\": 60,\n                \"lon\": -10\n              },\n              \"bottom_right\": {\n                \"lat\": 45,\n                \"lon\": 20\n              }\n            }\n          }\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"took\": 5670,\n  \"timed_out\": false,\n  \"_shards\": {\n    \"total\": 4733,\n    \"successful\": 1346,\n    \"skipped\": 7075,\n    \"failed\": 2574\n  },\n  \"hits\": {\n    \"total\": 1087,\n    \"max_score\": 5904.913222622078,\n    \"hits\": [\n      {\n        \"_index\": \"string\",\n        \"_type\": \"string\",\n        \"_id\": \"string\",\n        \"_score\": 2007.63434446248,\n        \"_source\": {\n          \"URI\": \"https://jlCaolEPZqqCkHOg.gcduknO8YAym9NczE46HY\",\n          \"parentURI\": \"http://oYqZUxVuMdkBoyPYLrwsJEoYvmXmr.xfyxNfPlmLCRFNzMnvmV4U7fXWgSFt\",\n          \"agg-author\": [\n            \"string\",\n            \"string\"\n          ],\n          \"agg-campaign\": \"string\",\n          \"agg-method\": \"string\",\n          \"agg-location\": \"string\",\n          \"agg-basis\": \"string\",\n          \"agg-pubYear\": 8098,\n          \"minDateTime\": \"1973-02-21T06:36:42.068Z\",\n          \"maxDateTime\": \"2011-08-27T16:24:06.786Z\",\n          \"northBoundLatitude\": 3184.5677716067444,\n          \"southBoundLatitude\": 5582.048516338531,\n          \"eastBoundLongitude\": 1288.051124544717,\n          \"westBoundLongitude\": 5630.810034315052,\n          \"meanPosition\": {\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"geoCoverage\": {},\n          \"nDataPoints\": 3251,\n          \"techKeyword\": [\n            \"string\",\n            \"string\"\n          ],\n          \"oaiSet\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      },\n      {\n        \"_index\": \"string\",\n        \"_type\": \"string\",\n        \"_id\": \"string\",\n        \"_score\": 4973.460575697763,\n        \"_source\": {\n          \"URI\": \"http://couZwHYJYiyadWWqltcDMAbpOryV.cvqwaDmcsgi15LbdL\",\n          \"parentURI\": \"http://ztUAGmICTCZCcwqzhAvGhpwOilXAGWZh.oshStQmdebtOgViRdXtEromMQMzijyg-RpdhuG-\",\n          \"agg-author\": [\n            \"string\",\n            \"string\"\n          ],\n          \"agg-campaign\": \"string\",\n          \"agg-method\": \"string\",\n          \"agg-location\": \"string\",\n          \"agg-basis\": \"string\",\n          \"agg-pubYear\": 3184,\n          \"minDateTime\": \"2000-01-17T07:32:03.877Z\",\n          \"maxDateTime\": \"1999-04-10T16:57:26.425Z\",\n          \"northBoundLatitude\": 8357.847562790252,\n          \"southBoundLatitude\": 2643.550249316532,\n          \"eastBoundLongitude\": 4449.95641693573,\n          \"westBoundLongitude\": 1009.763642598438,\n          \"meanPosition\": {\n            \"lat\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"geoCoverage\": {},\n          \"nDataPoints\": 5666,\n          \"techKeyword\": [\n            \"string\",\n            \"string\"\n          ],\n          \"oaiSet\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ws.pangaea.de",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9eef982c-06d3-44f3-abf8-adb00c0d5583",
+    "name": "PANGAEA Data Download Services DOI Filter Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST services for retrieving geoscientific data from PANGAEA's archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.\n\n\nContact Support:\n Name: PANGAEA Technical Support\n Email: tech@pangaea.de",
+      "type": "text/plain"
+    }
+  }
+}

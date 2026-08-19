@@ -1,0 +1,127 @@
+{
+  "item": [
+    {
+      "id": "19eed422-b439-4192-b724-169d76987d74",
+      "name": "Terms",
+      "description": {
+        "content": "Controlled vocabulary and term dictionary",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ee6d537e-5320-465e-b3de-24d6e8c8e8b4",
+          "name": "Search PANGAEA Term Dictionary",
+          "request": {
+            "name": "Search PANGAEA Term Dictionary",
+            "description": {
+              "content": "Search PANGAEA's controlled vocabulary and term dictionary used for classifying datasets by topic, parameter, and method. Elasticsearch-backed REST endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pangaea-terms",
+                "term",
+                "_search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<object>\",\n  \"size\": 10,\n  \"from\": 0,\n  \"sort\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"aggs\": \"<object>\",\n  \"_source\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43e8a312-a47a-4312-a308-eea69812696e",
+              "name": "Term search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pangaea-terms",
+                    "term",
+                    "_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"match\": {\n      \"name\": \"temperature\"\n    }\n  },\n  \"size\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"took\": 2647,\n  \"timed_out\": false,\n  \"_shards\": {\n    \"total\": 6912,\n    \"successful\": 8944,\n    \"skipped\": 6834,\n    \"failed\": 315\n  },\n  \"hits\": {\n    \"total\": 7575,\n    \"hits\": [\n      {\n        \"_id\": \"string\",\n        \"_score\": 3015.423664137834,\n        \"_source\": {\n          \"name\": \"string\",\n          \"abbreviation\": \"string\",\n          \"unit\": \"string\",\n          \"type\": \"string\"\n        }\n      },\n      {\n        \"_id\": \"string\",\n        \"_score\": 2456.2649154967507,\n        \"_source\": {\n          \"name\": \"string\",\n          \"abbreviation\": \"string\",\n          \"unit\": \"string\",\n          \"type\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ws.pangaea.de",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8ed2ff4b-4071-46fd-987f-2aa448ebfad6",
+    "name": "PANGAEA Data Download Services DOI Filter Terms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST services for retrieving geoscientific data from PANGAEA's archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.\n\n\nContact Support:\n Name: PANGAEA Technical Support\n Email: tech@pangaea.de",
+      "type": "text/plain"
+    }
+  }
+}

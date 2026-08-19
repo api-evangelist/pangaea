@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PANGAEA Data Download Services DOI Filter Terms API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Terms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search PANGAEA Term Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ws.pangaea.de/pangaea-terms/term/_search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search PANGAEA's controlled vocabulary and term dictionary used for classifying datasets by topic, parameter, and method. Elasticsearch-backed REST endpoint.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

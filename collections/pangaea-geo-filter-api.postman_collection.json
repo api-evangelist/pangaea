@@ -1,0 +1,314 @@
+{
+  "item": [
+    {
+      "id": "d52167e1-99d3-41cc-bcce-93dc94c09a70",
+      "name": "Geo Filter",
+      "description": {
+        "content": "Filter cross-dataset data by geographic and temporal constraints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0fae4947-c7db-47f8-bea7-a206fe2e31b2",
+          "name": "Query Data by Geographic Parameters",
+          "request": {
+            "name": "Query Data by Geographic Parameters",
+            "description": {
+              "content": "Retrieve geoscientific measurements across multiple datasets filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements from specific ocean regions, time periods, or depth intervals.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dds-fgp",
+                "rest",
+                "dwhquery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "westBoundLon",
+                  "value": "<float>",
+                  "description": "(Required) Western boundary longitude in decimal degrees (-180 to 180)"
+                },
+                {
+                  "disabled": false,
+                  "key": "southBoundLat",
+                  "value": "<float>",
+                  "description": "(Required) Southern boundary latitude in decimal degrees (-90 to 90)"
+                },
+                {
+                  "disabled": false,
+                  "key": "eastBoundLon",
+                  "value": "<float>",
+                  "description": "(Required) Eastern boundary longitude in decimal degrees (-180 to 180)"
+                },
+                {
+                  "disabled": false,
+                  "key": "northBoundLat",
+                  "value": "<float>",
+                  "description": "(Required) Northern boundary latitude in decimal degrees (-90 to 90)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pangaeaParameterIDs",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of internal PANGAEA parameter IDs to retrieve. Parameter IDs can be found via the PANGAEA Term Dictionary API.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateTimeMin",
+                  "value": "<dateTime>",
+                  "description": "Start date/time filter in ISO 8601 format"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateTimeMax",
+                  "value": "<dateTime>",
+                  "description": "End date/time filter in ISO 8601 format"
+                },
+                {
+                  "disabled": false,
+                  "key": "depthMin",
+                  "value": "<float>",
+                  "description": "Minimum water depth in meters (below sea surface)"
+                },
+                {
+                  "disabled": false,
+                  "key": "depthMax",
+                  "value": "<float>",
+                  "description": "Maximum water depth in meters (below sea surface)"
+                },
+                {
+                  "disabled": false,
+                  "key": "depthMinSed",
+                  "value": "<float>",
+                  "description": "Minimum sediment/rock depth in meters below seafloor"
+                },
+                {
+                  "disabled": false,
+                  "key": "depthMaxSed",
+                  "value": "<float>",
+                  "description": "Maximum sediment/rock depth in meters below seafloor"
+                },
+                {
+                  "disabled": false,
+                  "key": "projectID",
+                  "value": "<integer>",
+                  "description": "Internal PANGAEA project identifier to filter results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/tab-separated-values"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1375eeb0-9370-40af-9e46-0834ef5ea027",
+              "name": "Tab-delimited cross-dataset measurements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dds-fgp",
+                    "rest",
+                    "dwhquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "westBoundLon",
+                      "value": "-10"
+                    },
+                    {
+                      "key": "southBoundLat",
+                      "value": "45"
+                    },
+                    {
+                      "key": "eastBoundLon",
+                      "value": "20"
+                    },
+                    {
+                      "key": "northBoundLat",
+                      "value": "60"
+                    },
+                    {
+                      "key": "pangaeaParameterIDs",
+                      "value": "1350,1351"
+                    },
+                    {
+                      "key": "dateTimeMin",
+                      "value": "2010-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "dateTimeMax",
+                      "value": "2020-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "depthMin",
+                      "value": "0"
+                    },
+                    {
+                      "key": "depthMax",
+                      "value": "500"
+                    },
+                    {
+                      "key": "depthMinSed",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "depthMaxSed",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "projectID",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/tab-separated-values"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/tab-separated-values"
+                }
+              ],
+              "body": "Date/Time\tLatitude\tLongitude\tDepth water [m]\tTemp [°C]\tSource\n2015-06-15T08:00:00\t52.3\t8.1\t50\t12.3\thttps://doi.pangaea.de/10.1594/PANGAEA.833575\n2016-07-20T10:30:00\t53.1\t9.2\t75\t11.8\thttps://doi.pangaea.de/10.1594/PANGAEA.912345\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce0c1d63-bc4b-46e4-8136-6561a402b7f7",
+              "name": "Bad request - invalid or missing parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dds-fgp",
+                    "rest",
+                    "dwhquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "westBoundLon",
+                      "value": "-10"
+                    },
+                    {
+                      "key": "southBoundLat",
+                      "value": "45"
+                    },
+                    {
+                      "key": "eastBoundLon",
+                      "value": "20"
+                    },
+                    {
+                      "key": "northBoundLat",
+                      "value": "60"
+                    },
+                    {
+                      "key": "pangaeaParameterIDs",
+                      "value": "1350,1351"
+                    },
+                    {
+                      "key": "dateTimeMin",
+                      "value": "2010-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "dateTimeMax",
+                      "value": "2020-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "depthMin",
+                      "value": "0"
+                    },
+                    {
+                      "key": "depthMax",
+                      "value": "500"
+                    },
+                    {
+                      "key": "depthMinSed",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "depthMaxSed",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "projectID",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ws.pangaea.de",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ed9f3065-3433-4ceb-8a7e-87e17c472568",
+    "name": "PANGAEA Data Download Services DOI Filter Geo Filter API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST services for retrieving geoscientific data from PANGAEA's archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.\n\n\nContact Support:\n Name: PANGAEA Technical Support\n Email: tech@pangaea.de",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PANGAEA Data Download Services DOI Filter API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DOI Filter",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Dataset by DOI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ws.pangaea.de/dds-fdp/rest/panquery",
+            "params": [
+              {
+                "name": "datasetDOI",
+                "value": "10.1594/PANGAEA.833575",
+                "type": "query",
+                "description": "DOI of the PANGAEA dataset to retrieve. When used alone, returns the entire dataset. Can be the full DOI URI or just the suffix.\n"
+              },
+              {
+                "name": "columns",
+                "value": "1,2,3,5",
+                "type": "query",
+                "description": "Comma-delimited list of column numbers to include in the response (no spaces). If omitted, all columns are returned.\n"
+              },
+              {
+                "name": "filterParameterValue",
+                "value": "3:>21",
+                "type": "query",
+                "description": "Filter rows by parameter value. Format is \"column:value\" or \"column:>value\" or \"column:<value\". Multiple filters use AND logic; multiple values within a filter use OR logic. Can be repeated.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve tabular dataset data filtered by dataset DOI and optional parameter values. Supports column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic. Returns tab-delimited data files.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

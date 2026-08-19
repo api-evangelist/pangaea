@@ -1,0 +1,174 @@
+{
+  "item": [
+    {
+      "id": "2d593e03-ae41-4214-95a2-262f72e97cf4",
+      "name": "OAI-PMH",
+      "description": {
+        "content": "Open Archives Initiative Protocol for Metadata Harvesting 2.0",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "663c6aff-9052-4ea9-ad61-15adf76414ac",
+          "name": "OAI-PMH Request",
+          "request": {
+            "name": "OAI-PMH Request",
+            "description": {
+              "content": "OAI-PMH 2.0 endpoint supporting all standard verbs: Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, and GetRecord. All responses are returned as XML.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "provider"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "verb",
+                  "value": "<string>",
+                  "description": "(Required) OAI-PMH verb specifying the request type"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadataPrefix",
+                  "value": "<string>",
+                  "description": "Metadata format to return. Required for ListIdentifiers, ListRecords, and GetRecord verbs.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "identifier",
+                  "value": "<string>",
+                  "description": "Unique identifier of the record to retrieve. Required for GetRecord verb. Format: oai:pangaea.de:doi:10.1594/PANGAEA.{id}\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "set",
+                  "value": "<string>",
+                  "description": "Set specification for selective harvesting. Optional for ListIdentifiers and ListRecords verbs.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<date>",
+                  "description": "UTC date for selective harvesting - only return records modified on or after this date. ISO 8601 format.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<date>",
+                  "description": "UTC date for selective harvesting - only return records modified on or before this date. ISO 8601 format.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "resumptionToken",
+                  "value": "<string>",
+                  "description": "Token for resuming a previous incomplete list request. Mutually exclusive with other parameters except verb.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ba0e75c-1aa5-44e1-9d92-42b0896d1b2f",
+              "name": "OAI-PMH XML response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verb",
+                      "value": "Identify"
+                    },
+                    {
+                      "key": "metadataPrefix",
+                      "value": "oai_dc"
+                    },
+                    {
+                      "key": "identifier",
+                      "value": "oai:pangaea.de:doi:10.1594/PANGAEA.833575"
+                    },
+                    {
+                      "key": "set",
+                      "value": "topicOceanAtmosphere"
+                    },
+                    {
+                      "key": "from",
+                      "value": "2020-01-01"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2020-12-31"
+                    },
+                    {
+                      "key": "resumptionToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<element><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\">\n  <responseDate>2026-06-13T00:00:00Z</responseDate>\n  <request verb=\"Identify\">https://ws.pangaea.de/oai/provider</request>\n  <Identify>\n    <repositoryName>PANGAEA</repositoryName>\n    <baseURL>https://ws.pangaea.de/oai/provider</baseURL>\n    <protocolVersion>2.0</protocolVersion>\n    <adminEmail>tech@pangaea.de</adminEmail>\n    <earliestDatestamp>2015-01-01</earliestDatestamp>\n    <deletedRecord>no</deletedRecord>\n    <granularity>YYYY-MM-DD</granularity>\n  </Identify>\n</OAI-PMH>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ws.pangaea.de",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "24660801-305d-4b8b-918d-dee96ce7c063",
+    "name": "PANGAEA Data Download Services DOI Filter OAI-PMH API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST services for retrieving geoscientific data from PANGAEA's archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.\n\n\nContact Support:\n Name: PANGAEA Technical Support\n Email: tech@pangaea.de",
+      "type": "text/plain"
+    }
+  }
+}

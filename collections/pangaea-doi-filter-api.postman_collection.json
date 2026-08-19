@@ -1,0 +1,232 @@
+{
+  "item": [
+    {
+      "id": "38ccb45e-a17f-40ad-941b-bf37f0cc6d45",
+      "name": "DOI Filter",
+      "description": {
+        "content": "Filter dataset data by DOI and parameter values",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "22d2e630-b93f-4b70-8fc8-3ebd56a181d2",
+          "name": "Query Dataset by DOI",
+          "request": {
+            "name": "Query Dataset by DOI",
+            "description": {
+              "content": "Retrieve tabular dataset data filtered by dataset DOI and optional parameter values. Supports column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic. Returns tab-delimited data files.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dds-fdp",
+                "rest",
+                "panquery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datasetDOI",
+                  "value": "<string>",
+                  "description": "(Required) DOI of the PANGAEA dataset to retrieve. When used alone, returns the entire dataset. Can be the full DOI URI or just the suffix.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "columns",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of column numbers to include in the response (no spaces). If omitted, all columns are returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterParameterValue",
+                  "value": "<string>",
+                  "description": "Filter rows by parameter value. Format is \"column:value\" or \"column:>value\" or \"column:<value\". Multiple filters use AND logic; multiple values within a filter use OR logic. Can be repeated.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/tab-separated-values"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b305ff2-9ad1-4e4c-9a61-06c3b755d11f",
+              "name": "Tab-delimited dataset data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dds-fdp",
+                    "rest",
+                    "panquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datasetDOI",
+                      "value": "10.1594/PANGAEA.833575"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "1,2,3,5"
+                    },
+                    {
+                      "key": "filterParameterValue",
+                      "value": "3:>21"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/tab-separated-values"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/tab-separated-values"
+                }
+              ],
+              "body": "Date/Time\tLatitude\tLongitude\tDepth water [m]\tTemp [°C]\n2014-03-01T12:00:00\t52.5\t8.3\t100\t8.5\n2014-03-01T13:00:00\t52.5\t8.3\t200\t6.2\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed1ff38f-ea41-4c98-8aee-3537f703eda9",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dds-fdp",
+                    "rest",
+                    "panquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datasetDOI",
+                      "value": "10.1594/PANGAEA.833575"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "1,2,3,5"
+                    },
+                    {
+                      "key": "filterParameterValue",
+                      "value": "3:>21"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c0f65cd6-c3f4-4a63-8cbd-57cdfa1f9b63",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dds-fdp",
+                    "rest",
+                    "panquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datasetDOI",
+                      "value": "10.1594/PANGAEA.833575"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "1,2,3,5"
+                    },
+                    {
+                      "key": "filterParameterValue",
+                      "value": "3:>21"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ws.pangaea.de",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b8d9640c-dc22-4690-b878-091310832252",
+    "name": "PANGAEA Data Download Services DOI Filter API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST services for retrieving geoscientific data from PANGAEA's archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.\n\n\nContact Support:\n Name: PANGAEA Technical Support\n Email: tech@pangaea.de",
+      "type": "text/plain"
+    }
+  }
+}

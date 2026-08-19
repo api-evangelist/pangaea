@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PANGAEA Data Download Services DOI Filter OAI-PMH API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAI-PMH",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OAI-PMH Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ws.pangaea.de/provider",
+            "params": [
+              {
+                "name": "verb",
+                "value": "Identify",
+                "type": "query",
+                "description": "OAI-PMH verb specifying the request type"
+              },
+              {
+                "name": "metadataPrefix",
+                "value": "oai_dc",
+                "type": "query",
+                "description": "Metadata format to return. Required for ListIdentifiers, ListRecords, and GetRecord verbs.\n"
+              },
+              {
+                "name": "identifier",
+                "value": "oai:pangaea.de:doi:10.1594/PANGAEA.833575",
+                "type": "query",
+                "description": "Unique identifier of the record to retrieve. Required for GetRecord verb. Format: oai:pangaea.de:doi:10.1594/PANGAEA.{id}\n"
+              },
+              {
+                "name": "set",
+                "value": "topicOceanAtmosphere",
+                "type": "query",
+                "description": "Set specification for selective harvesting. Optional for ListIdentifiers and ListRecords verbs.\n"
+              },
+              {
+                "name": "from",
+                "value": "2020-01-01",
+                "type": "query",
+                "description": "UTC date for selective harvesting - only return records modified on or after this date. ISO 8601 format.\n"
+              },
+              {
+                "name": "until",
+                "value": "2020-12-31",
+                "type": "query",
+                "description": "UTC date for selective harvesting - only return records modified on or before this date. ISO 8601 format.\n"
+              },
+              {
+                "name": "resumptionToken",
+                "value": "",
+                "type": "query",
+                "description": "Token for resuming a previous incomplete list request. Mutually exclusive with other parameters except verb.\n"
+              }
+            ]
+          },
+          "docs": "OAI-PMH 2.0 endpoint supporting all standard verbs: Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, and GetRecord. All responses are returned as XML.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

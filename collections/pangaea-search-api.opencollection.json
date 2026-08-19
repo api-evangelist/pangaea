@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PANGAEA Data Download Services DOI Filter Search API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search PANGAEA Datasets (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ws.pangaea.de/panmd/_search",
+            "params": [
+              {
+                "name": "q",
+                "value": "ocean temperature",
+                "type": "query",
+                "description": "Elasticsearch query string (Lucene syntax supported)"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return (max 10000)"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination"
+              },
+              {
+                "name": "pretty",
+                "value": "",
+                "type": "query",
+                "description": "Pretty-print the JSON response"
+              }
+            ]
+          },
+          "docs": "Search PANGAEA's metadata index of 445,000+ geoscientific datasets using Elasticsearch query DSL via GET request. Supports full-text search, bounding box filters, temporal range filters, and faceted aggregations.\n"
+        },
+        {
+          "info": {
+            "name": "Search PANGAEA Datasets (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ws.pangaea.de/panmd/_search",
+            "params": [
+              {
+                "name": "pretty",
+                "value": "",
+                "type": "query",
+                "description": "Pretty-print the JSON response"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search PANGAEA's metadata index using a full Elasticsearch query DSL body. This allows complex queries including boolean logic, geo-bounding box filters, temporal range filters, aggregations, and sorting.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
