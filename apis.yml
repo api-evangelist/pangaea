@@ -1,5 +1,7 @@
 name: PANGAEA
-description: PANGAEA is a data publisher and library for earth and environmental science, providing open access to geoscientific datasets including ocean data, climate records, sediment cores, and environmental measurements from scientific expeditions worldwide.
+description: PANGAEA is a data publisher and library for earth and environmental science, providing open
+  access to geoscientific datasets including ocean data, climate records, sediment cores, and environmental
+  measurements from scientific expeditions worldwide.
 deliveryModel:
   model: unknown
   open_source: false
@@ -26,25 +28,24 @@ accessModel:
   method: derived
 image: https://www.pangaea.de/assets/img/pangaea-logo.png
 tags:
-  - Earth Science
-  - Ocean Data
-  - Climate Records
-  - Environmental Science
-  - Geoscience
-  - Open Data
-  - Scientific Data
+- Earth Science
+- Ocean Data
+- Climate Records
+- Environmental Science
+- Geoscience
+- Open Data
+- Scientific Data
 url: https://www.pangaea.de/
 baseURL: https://ws.pangaea.de/
 humanURL: https://www.pangaea.de/
 contact:
-  - FN: PANGAEA Technical Support
-    email: tech@pangaea.de
+- FN: PANGAEA Technical Support
+  email: tech@pangaea.de
 apis:
 - name: PANGAEA Data Download Service - Filter by DOI
-  description: >-
-    REST service for retrieving tabular dataset data filtered by dataset DOI and parameter values. Supports
-    column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic.
-    Returns tab-delimited data files.
+  description: REST service for retrieving tabular dataset data filtered by dataset DOI and parameter
+    values. Supports column selection, value filtering with range queries, and multiple filter criteria
+    with AND/OR logic. Returns tab-delimited data files.
   humanURL: https://ws.pangaea.de/dds-fdp/
   baseURL: https://ws.pangaea.de/dds-fdp/rest/panquery
   tags:
@@ -59,10 +60,9 @@ apis:
   - FN: PANGAEA Technical Support
     email: tech@pangaea.de
 - name: PANGAEA Data Download Service - Filter by Geo Parameters
-  description: >-
-    REST service for retrieving geoscientific measurements filtered by geographic bounding box, temporal
-    range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements
-    from specific ocean regions, time periods, or depth intervals.
+  description: REST service for retrieving geoscientific measurements filtered by geographic bounding
+    box, temporal range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset
+    measurements from specific ocean regions, time periods, or depth intervals.
   humanURL: https://ws.pangaea.de/dds-fgp/
   baseURL: https://ws.pangaea.de/dds-fgp/rest/dwhquery
   tags:
@@ -78,9 +78,8 @@ apis:
   - FN: PANGAEA Technical Support
     email: tech@pangaea.de
 - name: PANGAEA Bathymetry WMS
-  description: >-
-    OGC-compliant Web Map Service providing bathymetric (ocean depth) map layers for integration into
-    GIS software. Hosted by AWI and based on PANGAEA bathymetry data collected from scientific expeditions.
+  description: OGC-compliant Web Map Service providing bathymetric (ocean depth) map layers for integration
+    into GIS software. Hosted by AWI and based on PANGAEA bathymetry data collected from scientific expeditions.
   humanURL: https://www.pangaea.de/tools/
   baseURL: https://maps.awi.de/services/common/pangaea_bathymetry/wms
   tags:
@@ -96,9 +95,8 @@ apis:
   - FN: PANGAEA Technical Support
     email: tech@pangaea.de
 - name: PANGAEA Term Dictionary API
-  description: >-
-    Elasticsearch-backed REST API for querying PANGAEA's controlled vocabulary and term dictionary used
-    for classifying datasets by topic, parameter, and method.
+  description: Elasticsearch-backed REST API for querying PANGAEA's controlled vocabulary and term dictionary
+    used for classifying datasets by topic, parameter, and method.
   humanURL: https://ws.pangaea.de/
   baseURL: https://ws.pangaea.de/es/pangaea-terms/term/_search
   tags:
@@ -182,11 +180,13 @@ apis:
     url: https://wiki.pangaea.de/wiki/PANGAEA_search
   - type: Documentation
     url: https://www.pangaea.de/about/services.php
-modified: 2026-06-13
+modified: '2026-09-16'
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 common:
+- type: Website
+  url: https://pangaea.de
 - type: AgenticAccess
   url: agentic-access/pangaea-agentic-access.yml
 - type: VulnerabilityDisclosure
