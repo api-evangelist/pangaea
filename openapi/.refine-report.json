@@ -1,11 +1,9 @@
 {
   "provider": "pangaea",
   "sources": [
-    "pangaea-doi-filter-api-openapi.yml",
-    "pangaea-geo-filter-api-openapi.yml",
-    "pangaea-oai-pmh-api-openapi.yml",
-    "pangaea-search-api-openapi.yml",
-    "pangaea-terms-api-openapi.yml"
+    "_original/pangaea-data-download-api.yml",
+    "_original/pangaea-oai-pmh-api.yml",
+    "_original/pangaea-search-api.yml"
   ],
   "outputs": [
     "pangaea-doi-filter-api-openapi.yml",
@@ -17,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "pangaea-data-download-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "pangaea-oai-pmh-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "pangaea-search-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "pangaea-doi-filter-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pangaea-geo-filter-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pangaea-oai-pmh-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pangaea-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pangaea-terms-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

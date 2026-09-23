@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PANGAEA Data Download Services DOI Filter Geo Filter API
-  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
-
-    '
+  title: PANGAEA Data Download Services Geo Filter API
+  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.'
   version: 1.0.0
   contact:
     name: PANGAEA Technical Support
@@ -23,9 +21,7 @@ paths:
     get:
       operationId: queryByGeoParameters
       summary: Query Data by Geographic Parameters
-      description: 'Retrieve geoscientific measurements across multiple datasets filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements from specific ocean regions, time periods, or depth intervals.
-
-        '
+      description: Retrieve geoscientific measurements across multiple datasets filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs. Ideal for extracting cross-dataset measurements from specific ocean regions, time periods, or depth intervals.
       tags:
       - Geo Filter
       parameters:

@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: PANGAEA Data Download Services DOI Filter API
-  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
-
-    '
+  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.'
   version: 1.0.0
   contact:
     name: PANGAEA Technical Support
@@ -23,9 +21,7 @@ paths:
     get:
       operationId: queryByDOI
       summary: Query Dataset by DOI
-      description: 'Retrieve tabular dataset data filtered by dataset DOI and optional parameter values. Supports column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic. Returns tab-delimited data files.
-
-        '
+      description: Retrieve tabular dataset data filtered by dataset DOI and optional parameter values. Supports column selection, value filtering with range queries, and multiple filter criteria with AND/OR logic. Returns tab-delimited data files.
       tags:
       - DOI Filter
       parameters:

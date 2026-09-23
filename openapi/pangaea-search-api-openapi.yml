@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PANGAEA Data Download Services DOI Filter Search API
-  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
-
-    '
+  title: PANGAEA Elasticsearch Search API
+  description: Full-text and faceted search across PANGAEA's 445,000+ geoscientific datasets using Elasticsearch. Supports spatial bounding box queries, temporal filtering, topic classification, and author/campaign searches. Returns dataset metadata including DOIs, geographic coverage, temporal ranges, and data point counts.
   version: 1.0.0
   contact:
     name: PANGAEA Technical Support
@@ -11,10 +9,10 @@ info:
   license:
     name: CC-BY 3.0
     url: https://creativecommons.org/licenses/by/3.0/
-  x-humanURL: https://www.pangaea.de/about/services.php
+  x-humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
 servers:
-- url: https://ws.pangaea.de
-  description: PANGAEA Web Services Production Server
+- url: https://ws.pangaea.de/es/pangaea
+  description: PANGAEA Elasticsearch Production Server
 tags:
 - name: Search
   description: Full-text and faceted dataset search
@@ -23,9 +21,7 @@ paths:
     get:
       operationId: searchDatasets
       summary: Search PANGAEA Datasets (GET)
-      description: 'Search PANGAEA''s metadata index of 445,000+ geoscientific datasets using Elasticsearch query DSL via GET request. Supports full-text search, bounding box filters, temporal range filters, and faceted aggregations.
-
-        '
+      description: Search PANGAEA's metadata index of 445,000+ geoscientific datasets using Elasticsearch query DSL via GET request. Supports full-text search, bounding box filters, temporal range filters, and faceted aggregations.
       tags:
       - Search
       parameters:
@@ -97,9 +93,7 @@ paths:
     post:
       operationId: searchDatasetsPost
       summary: Search PANGAEA Datasets (POST)
-      description: 'Search PANGAEA''s metadata index using a full Elasticsearch query DSL body. This allows complex queries including boolean logic, geo-bounding box filters, temporal range filters, aggregations, and sorting.
-
-        '
+      description: Search PANGAEA's metadata index using a full Elasticsearch query DSL body. This allows complex queries including boolean logic, geo-bounding box filters, temporal range filters, aggregations, and sorting.
       tags:
       - Search
       parameters:
@@ -153,6 +147,30 @@ paths:
                 $ref: '#/components/schemas/SearchResponse'
 components:
   schemas:
+    ShardsInfo:
+      type: object
+      properties:
+        total:
+          type: integer
+        successful:
+          type: integer
+        skipped:
+          type: integer
+        failed:
+          type: integer
+    SearchResponse:
+      type: object
+      properties:
+        took:
+          type: integer
+          description: Query execution time in milliseconds
+        timed_out:
+          type: boolean
+          description: Whether the query timed out
+        _shards:
+          $ref: '#/components/schemas/ShardsInfo'
+        hits:
+          $ref: '#/components/schemas/HitsContainer'
     DatasetHit:
       type: object
       properties:
@@ -241,19 +259,6 @@ components:
           items:
             type: string
           description: OAI-PMH set memberships
-    SearchResponse:
-      type: object
-      properties:
-        took:
-          type: integer
-          description: Query execution time in milliseconds
-        timed_out:
-          type: boolean
-          description: Whether the query timed out
-        _shards:
-          $ref: '#/components/schemas/ShardsInfo'
-        hits:
-          $ref: '#/components/schemas/HitsContainer'
     SearchRequest:
       type: object
       description: Elasticsearch query DSL request body
@@ -286,17 +291,6 @@ components:
             items:
               type: string
           description: Fields to include in source
-    ShardsInfo:
-      type: object
-      properties:
-        total:
-          type: integer
-        successful:
-          type: integer
-        skipped:
-          type: integer
-        failed:
-          type: integer
     GeoPoint:
       type: object
       description: Geographic coordinate point

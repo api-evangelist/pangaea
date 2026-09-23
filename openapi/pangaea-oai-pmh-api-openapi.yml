@@ -1,10 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PANGAEA Data Download Services DOI Filter OAI-PMH API
-  description: 'REST services for retrieving geoscientific data from PANGAEA''s archive. Two complementary services are provided: a DOI-based filter service for retrieving tabular data from specific datasets, and a geo-parameter service for cross-dataset retrieval filtered by geographic bounding box, temporal range, and depth constraints.
-
-    '
-  version: 1.0.0
+  title: PANGAEA Metadata Harvesting OAI PMH API
+  description: OAI-PMH 2.0 compliant endpoint for harvesting metadata from PANGAEA's dataset repository. Supports multiple metadata formats including JSON-LD, DataCite XML, Dublin Core XML, ISO 19115/19139, and DIF/FGDC. Enables systematic harvesting of dataset records from January 2015 onward.
+  version: 2.0.0
   contact:
     name: PANGAEA Technical Support
     email: tech@pangaea.de
@@ -13,21 +11,19 @@ info:
     url: https://creativecommons.org/licenses/by/3.0/
   x-humanURL: https://www.pangaea.de/about/services.php
 servers:
-- url: https://ws.pangaea.de
-  description: PANGAEA Web Services Production Server
+- url: https://ws.pangaea.de/oai
+  description: PANGAEA OAI-PMH Production Server
 tags:
-- name: OAI-PMH
+- name: oai pmh
   description: Open Archives Initiative Protocol for Metadata Harvesting 2.0
 paths:
   /provider:
     get:
       operationId: oaiPmhRequest
       summary: OAI-PMH Request
-      description: 'OAI-PMH 2.0 endpoint supporting all standard verbs: Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, and GetRecord. All responses are returned as XML.
-
-        '
+      description: 'OAI-PMH 2.0 endpoint supporting all standard verbs: Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, and GetRecord. All responses are returned as XML.'
       tags:
-      - OAI-PMH
+      - oai pmh
       parameters:
       - name: verb
         in: query
