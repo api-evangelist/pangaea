@@ -35,6 +35,9 @@ tags:
 - Geoscience
 - Open Data
 - Scientific Data
+- Research Data
+- OAI-PMH
+- Research Repository
 url: https://www.pangaea.de/
 baseURL: https://ws.pangaea.de/
 humanURL: https://www.pangaea.de/
@@ -141,8 +144,8 @@ apis:
 - aid: pangaea:pangaea-oai-pmh-api
   name: PANGAEA OAI-PMH API
   description: Open Archives Initiative Protocol for Metadata Harvesting 2.0
-  humanURL: https://wiki.pangaea.de/wiki/PANGAEA_search
-  baseURL: https://ws.pangaea.de/es/pangaea/panmd/_search
+  humanURL: https://wiki.pangaea.de/wiki/OAI-PMH
+  baseURL: https://ws.pangaea.de/oai/provider
   tags:
   - OAI-PMH
   properties:

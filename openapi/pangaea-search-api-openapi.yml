@@ -147,6 +147,38 @@ paths:
                 $ref: '#/components/schemas/SearchResponse'
 components:
   schemas:
+    SearchRequest:
+      type: object
+      description: Elasticsearch query DSL request body
+      properties:
+        query:
+          type: object
+          description: Elasticsearch query object (match, bool, range, geo_bounding_box, etc.)
+        size:
+          type: integer
+          description: Number of results to return
+          default: 10
+          minimum: 1
+          maximum: 10000
+        from:
+          type: integer
+          description: Starting offset for pagination
+          default: 0
+        sort:
+          type: array
+          description: Sort criteria
+          items:
+            type: object
+        aggs:
+          type: object
+          description: Aggregation definitions
+        _source:
+          oneOf:
+          - type: boolean
+          - type: array
+            items:
+              type: string
+          description: Fields to include in source
     ShardsInfo:
       type: object
       properties:
@@ -158,6 +190,18 @@ components:
           type: integer
         failed:
           type: integer
+    GeoPoint:
+      type: object
+      description: Geographic coordinate point
+      properties:
+        lat:
+          type: number
+          format: float
+          description: Latitude in decimal degrees
+        lon:
+          type: number
+          format: float
+          description: Longitude in decimal degrees
     SearchResponse:
       type: object
       properties:
@@ -185,6 +229,20 @@ components:
           format: float
         _source:
           $ref: '#/components/schemas/DatasetMetadata'
+    HitsContainer:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of matching documents
+        max_score:
+          type: number
+          format: float
+          description: Maximum relevance score
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetHit'
     DatasetMetadata:
       type: object
       description: PANGAEA dataset metadata document
@@ -259,61 +317,3 @@ components:
           items:
             type: string
           description: OAI-PMH set memberships
-    SearchRequest:
-      type: object
-      description: Elasticsearch query DSL request body
-      properties:
-        query:
-          type: object
-          description: Elasticsearch query object (match, bool, range, geo_bounding_box, etc.)
-        size:
-          type: integer
-          description: Number of results to return
-          default: 10
-          minimum: 1
-          maximum: 10000
-        from:
-          type: integer
-          description: Starting offset for pagination
-          default: 0
-        sort:
-          type: array
-          description: Sort criteria
-          items:
-            type: object
-        aggs:
-          type: object
-          description: Aggregation definitions
-        _source:
-          oneOf:
-          - type: boolean
-          - type: array
-            items:
-              type: string
-          description: Fields to include in source
-    GeoPoint:
-      type: object
-      description: Geographic coordinate point
-      properties:
-        lat:
-          type: number
-          format: float
-          description: Latitude in decimal degrees
-        lon:
-          type: number
-          format: float
-          description: Longitude in decimal degrees
-    HitsContainer:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of matching documents
-        max_score:
-          type: number
-          format: float
-          description: Maximum relevance score
-        hits:
-          type: array
-          items:
-            $ref: '#/components/schemas/DatasetHit'
