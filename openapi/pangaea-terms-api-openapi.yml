@@ -44,38 +44,6 @@ paths:
                 $ref: '#/components/schemas/TermSearchResponse'
 components:
   schemas:
-    SearchRequest:
-      type: object
-      description: Elasticsearch query DSL request body
-      properties:
-        query:
-          type: object
-          description: Elasticsearch query object (match, bool, range, geo_bounding_box, etc.)
-        size:
-          type: integer
-          description: Number of results to return
-          default: 10
-          minimum: 1
-          maximum: 10000
-        from:
-          type: integer
-          description: Starting offset for pagination
-          default: 0
-        sort:
-          type: array
-          description: Sort criteria
-          items:
-            type: object
-        aggs:
-          type: object
-          description: Aggregation definitions
-        _source:
-          oneOf:
-          - type: boolean
-          - type: array
-            items:
-              type: string
-          description: Fields to include in source
     ShardsInfo:
       type: object
       properties:
@@ -125,3 +93,35 @@ components:
                       type:
                         type: string
                         description: Term type (parameter, method, topic)
+    SearchRequest:
+      type: object
+      description: Elasticsearch query DSL request body
+      properties:
+        query:
+          type: object
+          description: Elasticsearch query object (match, bool, range, geo_bounding_box, etc.)
+        size:
+          type: integer
+          description: Number of results to return
+          default: 10
+          minimum: 1
+          maximum: 10000
+        from:
+          type: integer
+          description: Starting offset for pagination
+          default: 0
+        sort:
+          type: array
+          description: Sort criteria
+          items:
+            type: object
+        aggs:
+          type: object
+          description: Aggregation definitions
+        _source:
+          oneOf:
+          - type: boolean
+          - type: array
+            items:
+              type: string
+          description: Fields to include in source
