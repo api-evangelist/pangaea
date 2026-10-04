@@ -147,17 +147,20 @@ paths:
                 $ref: '#/components/schemas/SearchResponse'
 components:
   schemas:
-    ShardsInfo:
+    DatasetHit:
       type: object
       properties:
-        total:
-          type: integer
-        successful:
-          type: integer
-        skipped:
-          type: integer
-        failed:
-          type: integer
+        _index:
+          type: string
+        _type:
+          type: string
+        _id:
+          type: string
+        _score:
+          type: number
+          format: float
+        _source:
+          $ref: '#/components/schemas/DatasetMetadata'
     SearchResponse:
       type: object
       properties:
@@ -203,6 +206,18 @@ components:
             items:
               type: string
           description: Fields to include in source
+    GeoPoint:
+      type: object
+      description: Geographic coordinate point
+      properties:
+        lat:
+          type: number
+          format: float
+          description: Latitude in decimal degrees
+        lon:
+          type: number
+          format: float
+          description: Longitude in decimal degrees
     HitsContainer:
       type: object
       properties:
@@ -291,29 +306,14 @@ components:
           items:
             type: string
           description: OAI-PMH set memberships
-    DatasetHit:
+    ShardsInfo:
       type: object
       properties:
-        _index:
-          type: string
-        _type:
-          type: string
-        _id:
-          type: string
-        _score:
-          type: number
-          format: float
-        _source:
-          $ref: '#/components/schemas/DatasetMetadata'
-    GeoPoint:
-      type: object
-      description: Geographic coordinate point
-      properties:
-        lat:
-          type: number
-          format: float
-          description: Latitude in decimal degrees
-        lon:
-          type: number
-          format: float
-          description: Longitude in decimal degrees
+        total:
+          type: integer
+        successful:
+          type: integer
+        skipped:
+          type: integer
+        failed:
+          type: integer
