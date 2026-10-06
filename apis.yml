@@ -183,11 +183,13 @@ apis:
     url: https://wiki.pangaea.de/wiki/PANGAEA_search
   - type: Documentation
     url: https://www.pangaea.de/about/services.php
-modified: '2026-09-16'
+modified: '2026-10-06'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- url: https://pangaea.de/news/
+  type: Blog
 - type: Website
   url: https://pangaea.de
 - type: AgenticAccess
