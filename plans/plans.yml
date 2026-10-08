@@ -40,3 +40,27 @@ plans:
     description: Organizations or projects wishing to publish data through PANGAEA may be asked for a financial contribution toward curation and publication costs if their project has dedicated funding available.
     cost: 500 EUR (net) suggested contribution for funded projects; free for unfunded submissions
     url: https://wiki.pangaea.de/wiki/FAQ
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Open Access
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Restricted Dataset Access
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Data Submission
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
