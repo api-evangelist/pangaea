@@ -64,66 +64,135 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-PANGAEA is a data publisher and library for earth and environmental science, providing open access to geoscientific datasets including ocean data, climate records, sediment cores, and environmental measurements from scientific expeditions worldwide. With over 445,000 datasets, PANGAEA serves as a critical infrastructure for the earth science research community.
+PANGAEA is a data publisher and library for earth and environmental science, providing open access to geoscientific datasets including ocean data, climate records, sediment cores, and environmental measurements from scientific expeditions worldwide.
 
-## APIs
+**Areas:** Earth Science · Ocean Data · Climate Records · Environmental Science · Geoscience · Open Data · Scientific Data · Research Data · OAI-PMH · Research Repository
 
-This repository catalogs the following PANGAEA public APIs:
+## PANGAEA on APIs.io
 
-### Elasticsearch Search API
-Full-text and faceted search across PANGAEA's datasets. Supports spatial bounding box queries, temporal filtering, topic classification, and author/campaign searches.
+Everything profiled for PANGAEA is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pangaea/](https://apis.io/providers/pangaea/)** — or go straight to one of the APIs or properties below.
 
-- Base URL: `https://ws.pangaea.de/es/pangaea/panmd/_search`
-- Protocol: REST (Elasticsearch)
-- Auth: None required
+### APIs (9)
 
-### OAI-PMH Metadata Harvesting API
-OAI-PMH 2.0 compliant endpoint for systematic metadata harvesting. Supports JSON-LD, DataCite XML, Dublin Core XML, ISO 19115/19139, and DIF/FGDC formats.
+- [PANGAEA Data Download Service - Filter by DOI](https://apis.io/apis/pangaea/pangaea-data-download-service-filter-by-doi/) — REST service for retrieving tabular dataset data filtered by dataset DOI and parameter values. Supports column selection, value filtering with range…
+- [PANGAEA Data Download Service - Filter by Geo Parameters](https://apis.io/apis/pangaea/pangaea-data-download-service-filter-by-geo-parameters/) — REST service for retrieving geoscientific measurements filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs.…
+- [PANGAEA Bathymetry WMS](https://apis.io/apis/pangaea/pangaea-bathymetry-wms/) — OGC-compliant Web Map Service providing bathymetric (ocean depth) map layers for integration into GIS software. Hosted by AWI and based on PANGAEA…
+- [PANGAEA Term Dictionary API](https://apis.io/apis/pangaea/pangaea-term-dictionary-api/) — Elasticsearch-backed REST API for querying PANGAEA's controlled vocabulary and term dictionary used for classifying datasets by topic, parameter, and method.
+- [PANGAEA DOI Filter API](https://apis.io/apis/pangaea/pangaea-doi-filter-api/) — Filter dataset data by DOI and parameter values
+- [PANGAEA Geo Filter API](https://apis.io/apis/pangaea/pangaea-geo-filter-api/) — Filter cross-dataset data by geographic and temporal constraints
+- [PANGAEA OAI-PMH API](https://apis.io/apis/pangaea/pangaea-oai-pmh-api/) — Open Archives Initiative Protocol for Metadata Harvesting 2.0
+- [PANGAEA Search API](https://apis.io/apis/pangaea/pangaea-search-api/) — Full-text and faceted dataset search
+- [PANGAEA Terms API](https://apis.io/apis/pangaea/pangaea-terms-api/) — Controlled vocabulary and term dictionary
 
-- Base URL: `https://ws.pangaea.de/oai/provider`
-- Protocol: OAI-PMH 2.0
-- Auth: None required
+### Published properties
 
-### Data Download Service - Filter by DOI
-Retrieve filtered tabular data from a specific PANGAEA dataset identified by its DOI, with support for column selection and value-range filtering.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Base URL: `https://ws.pangaea.de/dds-fdp/rest/panquery`
-- Protocol: REST
-- Auth: None required
+#### Agentic access (1)
 
-### Data Download Service - Filter by Geo/Parameters
-Cross-dataset data retrieval filtered by geographic bounding box, temporal range, depth constraints, and PANGAEA parameter IDs.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Base URL: `https://ws.pangaea.de/dds-fgp/rest/dwhquery`
-- Protocol: REST
-- Auth: None required
+- [Pangaea Agentic Access](https://apis.io/agentic-access/pangaea/pangaea-agentic-access/)
 
-### Bathymetry WMS
-OGC-compliant Web Map Service providing bathymetric map layers based on PANGAEA-collected ocean depth measurements.
+#### Examples (3)
 
-- Base URL: `https://maps.awi.de/services/common/pangaea_bathymetry/wms`
-- Protocol: OGC WMS
-- Auth: None required
+Example requests and responses.
 
-### Term Dictionary API
-Query PANGAEA's controlled vocabulary for dataset classification topics, parameters, and methods.
+- [Download Data By Doi](https://apis.io/examples/pangaea/download-data-by-doi/)
+- [Oai Pmh Harvest](https://apis.io/examples/pangaea/oai-pmh-harvest/)
+- [Search By Bounding Box](https://apis.io/examples/pangaea/search-by-bounding-box/)
 
-- Base URL: `https://ws.pangaea.de/es/pangaea-terms/term/_search`
-- Protocol: REST (Elasticsearch)
-- Auth: None required
+#### Collections (5)
 
-## Client Libraries
+Postman and Open Collection request collections.
 
-- **Python**: [pangaeapy](https://pypi.org/project/pangaeapy/) — `pip install pangaeapy`
-- **R**: [pangaear](https://ropensci.github.io/pangaear/) — `install.packages("pangaear")`
+- [PANGAEA Data Download Services DOI Filter API](https://apis.io/collections/pangaea/open-pangaea-doi-filter-api/)
+- [PANGAEA Data Download Services DOI Filter Geo Filter API](https://apis.io/collections/pangaea/open-pangaea-geo-filter-api/)
+- [PANGAEA Data Download Services DOI Filter OAI-PMH API](https://apis.io/collections/pangaea/open-pangaea-oai-pmh-api/)
+- [PANGAEA Data Download Services DOI Filter Search API](https://apis.io/collections/pangaea/open-pangaea-search-api/)
+- [PANGAEA Data Download Services DOI Filter Terms API](https://apis.io/collections/pangaea/open-pangaea-terms-api/)
 
-## Pricing & Access
+#### Security (2)
 
-All PANGAEA APIs are free to use. PANGAEA is publicly funded by the Alfred Wegener Institute (AWI), MARUM (University of Bremen), and the Helmholtz Association. No API key or registration is required for public dataset access.
+Authentication, trust centre, and vulnerability disclosure.
 
-## Contact
+- [Pangaea Domain Security](https://apis.io/security/pangaea/pangaea-domain-security/)
+- [Pangaea Vulnerability Disclosure](https://apis.io/security/pangaea/pangaea-vulnerability-disclosure/)
 
-- Technical: tech@pangaea.de
-- Website: https://www.pangaea.de/
-- Services: https://www.pangaea.de/about/services.php
-- Wiki: https://wiki.pangaea.de/
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/pangaea/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/pangaea/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/pangaea/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://pangaea.de)
+- [Blog](https://pangaea.de/news/)
+
+## API Evangelist rating
+
+**Kin Score 23.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 48.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/pangaea/](https://apis.io/providers/pangaea/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PANGAEA: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pangaea/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
